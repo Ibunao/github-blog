@@ -1,6 +1,6 @@
 
 ---
-title: Yii-controller
+title: Yii-assets
 date: 2017-07-05 11:56:02
 tags:
 	- yii
