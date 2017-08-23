@@ -1,3 +1,10 @@
+---
+title: vue 学习
+date: 2017-07-01 11:56:02
+tags:
+  - vue
+categories: vue
+---
 
 > vue中 **数据和DOM** 是绑定的，**动态响应的**，数据改变，对应的DOM也会发生改变  
 
