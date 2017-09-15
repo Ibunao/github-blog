@@ -12,6 +12,78 @@ categories:
 > 工厂模式封装了类的声明过程，实例化对象不使用new声明了，可以解决 改类名需要去找到所有new此对象一个一个改的问题，  
 通过将new对象封装在一个方法里，如果类名进行改动，可以在方法里直接改，而不影响其他地方   
 工厂模式是一种良好的代码规范，是编写代码遵守的很好的一种习惯。使用工厂模式，可以使代码更简洁易懂，层次清晰。同时工厂模式也可以提高代码的可维护性。
+### 第一个版本
+> 只是省略了 new 的过程
+
+```php
+比如，我们有一些类，它们都继承自交通工具类：
+
+interface Vehicle
+{
+    public function drive();
+}
+
+class Car implements Vehicle
+{
+    public function drive()
+    {
+        echo '汽车靠四个轮子滚动行走。';
+    }
+}
+
+class Ship implements Vehicle
+{
+    public function drive()
+    {
+        echo '轮船靠螺旋桨划水前进。';
+    }
+}
+
+class Aircraft implements Vehicle
+{
+    public function drive()
+    {
+        echo '飞机靠螺旋桨和机翼的升力飞行。';
+    }
+}
+再创建一个工厂类，专门用作类的创建，：
+
+class VehicleFactory
+{
+    public static function build($className = null)
+    {
+        $className = ucfirst($className);
+        if ($className && class_exists($className)) {
+            return new $className();
+        }
+        return null;
+    }
+}
+工厂类用了一个静态方法来创建其他类，在客户端中就可以这样使用：
+
+VehicleFactory::build('Car')->drive();
+VehicleFactory::build('Ship')->drive();
+VehicleFactory::build('Aircraft')->drive();
+省去了每次都要new类的工作。
+```
+### 第二个版本
+> 可以更换类名  
+
+```php
+/**
+ * 工厂类
+ */
+class Factory
+{
+		static function createDatabase()
+		{
+				//这里的类名可以进行修改，而不影响其他代码
+				$db = new Database;
+				return $db;
+		}
+}
+
+```
 
 ## 单例模式
 > 单例模式：声明周期内，一个类只会实例化一次对象。主要用于防止多次创建数据库连接，造成资源浪费  
@@ -119,8 +191,86 @@ class PDO implements IDatabase
 2. 不同的策略类实现这个接口，来各自完成自己的实现相应方法的逻辑
 3. 在 `if else` 中调用不同的策略  
 
+举例  
+```php
+/**
+ * 策略接口
+ */
+interface OutputStrategy
+{
+    public function render($array);
+}
+
+/**
+ * 策略类1：返回序列化字符串
+ */
+class SerializeStrategy implements OutputStrategy
+{
+    public function render($array)
+    {
+        return serialize($array);
+    }
+}
+
+/**
+ * 策略类2：返回JSON编码后的字符串
+ */
+class JsonStrategy implements OutputStrategy
+{
+    public function render($array)
+    {
+        return json_encode($array);
+    }
+}
+
+/**
+ * 策略类3：直接返回数组
+ */
+class ArrayStrategy implements OutputStrategy
+{
+    public function render($array)
+    {
+        return $array;
+    }
+}
+
+/**
+ * 环境角色类
+ */
+class Output
+{
+    private $outputStrategy;
+
+    // 传入的参数必须是策略接口的子类或子类的实例
+    public function __construct(OutputStrategy $outputStrategy)
+    {
+        $this->outputStrategy = $outputStrategy;
+    }
+
+    public function renderOutput($array)
+    {
+        return $this->outputStrategy->render($array);
+    }
+}
+
+/**
+ * 客户端代码
+ */
+$test = ['a', 'b', 'c'];
+
+// 需要返回数组
+$output = new Output(new ArrayStrategy());
+$data = $output->renderOutput($test);
+
+// 需要返回JSON
+$output = new Output(new JsonStrategy());
+$data = $output->renderOutput($test);
+```
+
+
+
 **依赖倒置、控制反转**
-在一个类中的方法需要用到某个类的对象，如果在类的方法中直接创建，就导致了紧耦合，可以到要执行方法时，再将需要的对象创建出来赋值给所需此类的对象或方法  
+在一个类中的方法需要用到某个类的对象，如果在类的方法中直接创建，就导致了紧耦合，可以到要执行方法时，再将需要的对象创建出来赋值给所需此类的对象或方法。简单的理解就是，尽量不要再类中创建另一个类，而是通过传参的方式传递进去    
 
 ## 数据对象映射模式
 > 类似于yii的AR模式，通过操作对象的属性和方法来完成对数据的增删改查
@@ -407,3 +557,7 @@ $proxy = new Proxy;
 $proxy->getUserName($id);
 $proxy->setUserName($id, $name);
 ```
+
+> **[歪麦博客](https://www.awaimai.com/patterns)(UML类图的使用，php设计模式)**  
+> **[慕课网-php设计模式](http://www.imooc.com/learn/236)**  
+> **[参考资料](http://design-patterns.readthedocs.io/zh_CN/latest/index.html)**
