@@ -4,6 +4,11 @@
 ## 事件
 > $handler 事件处理程序  
 
+### 相关属性  
+```php
+//绑定的事件及事件处理程序存储
+private $_events = [];
+```
 ### 事件的绑定  
 ```php
 /**
@@ -118,6 +123,20 @@ public function trigger($name, Event $event = null)
     Event::trigger($this, $name, $event);
 }
 ```
+### 查看事件是否绑定绑定  
+```php
+/**
+ * Returns a value indicating whether there is any handler attached to the named event.
+ * @param string $name the event name
+ * @return bool whether there is any handler attached to the event.
+ */
+public function hasEventHandlers($name)
+{
+    //确定行为绑定
+    $this->ensureBehaviors();
+    return !empty($this->_events[$name]) || Event::hasHandlers($this, $name);
+}
+```
 ## 行为  
 > 将行为类中的属性和方法当做自己的使用  
 
@@ -129,7 +148,6 @@ class Behavior extends Object
 {
     // 指向行为本身所绑定的Component对象
     public $owner;
-
 
     /**
      * 子类可以覆盖这个方法，返回一个要绑定到 component 对象上的事件
@@ -158,7 +176,7 @@ class Behavior extends Object
     }
 
     /**
-     * 将行为和component对象绑定起来，并且将事件注册到component对象
+     * 将行为和component对象绑定起来，并且将事件event注册到component对象
      */
     public function attach($owner)
     {
@@ -181,4 +199,9 @@ class Behavior extends Object
         }
     }
 }
+```
+### 相关属性  
+```php
+
+private $_behaviors;
 ```
