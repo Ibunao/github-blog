@@ -1,6 +1,25 @@
 > component组件类是yii的核心基础类，`extends Object`   
 > 实现了事件功能    
 
+------
+> 为了实现 行为 Behavior 对象的属性和方法的注入， component 重写了 object 中所有和 调用属性以及方法有关的方法  ，
+原理很简单，就是在本 类 找不到的属性和方法，在绑定的行为里再找一遍  
+
+例如：
+```php
+public function __call($name, $params)
+{
+    $this->ensureBehaviors();
+    foreach ($this->_behaviors as $object) {
+        if ($object->hasMethod($name)) {
+            return call_user_func_array([$object, $name], $params);
+        }
+    }
+    throw new UnknownMethodException('Calling unknown method: ' .
+        get_class($this) . "::$name()");
+}
+```
+
 ## 事件
 > $handler 事件处理程序  
 
@@ -16,18 +35,18 @@ private $_events = [];
  *
  * $handler 事件处理程序的格式
  *
- * ```
+ *
  * function ($event) { ... }         // anonymous function
  * [$object, 'handleClick']          // $object->handleClick()
  * ['\Page', 'handleClick']           // \Page::handleClick()
  * 'handleClick'                     // global function handleClick()
- * ```
+ *
  *
  * 事件处理程序必须是下面的这种形式，$event 是 Event 对象
  *
- * ```
+ *
  * function ($event)
- * ```
+ *
  *  
  * @param string $name 事件名称
  * @param callable $handler 事件处理程序
@@ -161,12 +180,12 @@ class Behavior extends Object
      *
      * The following is an example:
      *
-     * ```php
+     * php
      * [
      *     Model::EVENT_BEFORE_VALIDATE => 'myBeforeValidate',
      *     Model::EVENT_AFTER_VALIDATE => 'myAfterValidate',
      * ]
-     * ```
+     *
      *
      * @return array events (array keys) and the corresponding event handler methods (array values).
      */
@@ -204,4 +223,159 @@ class Behavior extends Object
 ```php
 
 private $_behaviors;
+```
+
+### 行为的绑定  
+#### 静态方法绑定  
+##### 覆盖behaviors()
+例如：
+```php
+class User extends ActiveRecord
+{
+    public function behaviors()
+    {
+        return [
+            // 匿名的行为，仅直接给出行为的类名称
+            MyBehavior::className(),
+
+            // 名为myBehavior2的行为，也是仅给出行为的类名称
+            'myBehavior2' => MyBehavior::className(),
+
+            // 匿名行为，给出了MyBehavior类的配置数组
+            [
+                'class' => MyBehavior::className(),
+                'prop1' => 'value1',
+                'prop3' => 'value3',
+            ],
+
+            // 名为myBehavior4的行为，也是给出了MyBehavior类的配置数组
+            'myBehavior4' => [
+                'class' => MyBehavior::className(),
+                'prop1' => 'value1',
+                'prop3' => 'value3',
+            ]
+        ];
+    }
+}
+```
+实现原理：  
+component中大多数方法会调用 ensureBehaviors() 方法来确认绑定  
+```php
+/**
+* 确保 [[behaviors()]] 绑定到这个component上
+*/
+public function ensureBehaviors()
+{
+   if ($this->_behaviors === null) {
+       $this->_behaviors = [];
+       foreach ($this->behaviors() as $name => $behavior) {
+           $this->attachBehaviorInternal($name, $behavior);
+       }
+   }
+}
+/**
+ * 将行为绑定到component对象
+ * @param string|int $name 行为名字
+ * @param string|array|Behavior $behavior the behavior to be attached
+ * @return Behavior the attached behavior.
+ */
+private function attachBehaviorInternal($name, $behavior)
+{
+    // 不是 Behavior 实例，说是只是类名、配置数组，那么就创建出来
+    if (!($behavior instanceof Behavior)) {
+        $behavior = Yii::createObject($behavior);
+    }
+    // 匿名行为
+    if (is_int($name)) {
+        $behavior->attach($this);
+        $this->_behaviors[] = $behavior;
+    } else {
+        // 已经有一个同名的行为，要先解除，再将新的行为绑定上去。
+        if (isset($this->_behaviors[$name])) {
+            $this->_behaviors[$name]->detach();
+        }
+        $behavior->attach($this);
+        $this->_behaviors[$name] = $behavior;
+    }
+
+    return $behavior;
+}
+```
+##### 配置文件配置  
+例如：
+```php
+[
+    'as myBehavior2' => MyBehavior::className(),
+
+    'as myBehavior3' => [
+        'class' => MyBehavior::className(),
+        'prop1' => 'value1',
+        'prop3' => 'value3',
+    ],
+]
+```
+
+#### 动态方法绑定  
+`yii\base\Compoent::attachBehaviors()`  
+```php
+// 和静态绑定原理一样  
+/**
+ * 绑定单个
+ **/
+public function attachBehavior($name, $behavior)
+{
+    $this->ensureBehaviors();
+    return $this->attachBehaviorInternal($name, $behavior);
+}
+/**
+ * 绑定多个
+ **/
+public function attachBehaviors($behaviors)
+{
+    $this->ensureBehaviors();
+    foreach ($behaviors as $name => $behavior) {
+        $this->attachBehaviorInternal($name, $behavior);
+    }
+}
+```
+### 获取绑定的行为  
+```php
+//获取绑定的单个行为对象
+$behavior = $Component->getBehavior('myBehavior2');
+//获取所有绑定的行为对象
+$behaviors = $Component->getBehaviors();
+```
+
+### 解除行为  
+**解除单个**  
+例如：`$Component->detachBehavior('myBehavior2');`  
+```php
+public function detachBehavior($name)
+{
+    $this->ensureBehaviors();
+    if (isset($this->_behaviors[$name])) {
+        $behavior = $this->_behaviors[$name];
+        unset($this->_behaviors[$name]);
+        $behavior->detach();
+        return $behavior;
+    }
+
+    return null;
+}
+
+```
+**解除所有**  
+例如：`$Component->detachBehaviors();`  
+```php
+
+/**
+ * 解绑所有
+ */
+public function detachBehaviors()
+{
+    $this->ensureBehaviors();
+    foreach ($this->_behaviors as $name => $behavior) {
+        $this->detachBehavior($name);
+    }
+}
 ```

@@ -1,8 +1,9 @@
 ## class
 > `yii\base\Object`
 > `implements Configurable` 实现一个空接口
-## 方法解析
 
+
+## 方法解析
 ### 构造函数--配置对象
 > 可以通过配置来实现  
 
