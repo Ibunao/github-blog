@@ -317,7 +317,7 @@ class Container extends Component
     }
 
     /**
-		 * 在容器中注册类
+     * 在容器中注册类
      * Registers a class definition with this container.
      *
      * 示例
@@ -381,15 +381,81 @@ class Container extends Component
      */
     public function set($class, $definition = [], array $params = [])
     {
-				// 规范化 $definition 并写入 $_definitions[$class]
+		// 规范化 $definition 并写入 $_definitions[$class]
         $this->_definitions[$class] = $this->normalizeDefinition($class, $definition);
-				// 将构造函数参数写入 $_params[$class]
+		// 将构造函数参数写入 $_params[$class]
         $this->_params[$class] = $params;
-				// 删除$_singletons[$class]
+		// 删除$_singletons[$class]
         unset($this->_singletons[$class]);
         return $this;
     }
+=======================================================
+示例   
+$container = new \yii\di\Container;
 
+// 直接以类名注册一个依赖，虽然这么做没什么意义。
+// $_definition['yii\db\Connection'] = ['class' => 'yii\db\Connetcion']
+$container->set('yii\db\Connection');
+
+// 注册一个接口，当一个类依赖于该接口时，定义中的类会自动被实例化，并供
+// 有依赖需要的类使用。
+// $_definition['yii\mail\MailInterface'] = ['class' => 'yii\swiftmailer\Mailer']
+$container->set('yii\mail\MailInterface', 'yii\swiftmailer\Mailer');
+
+// 注册一个别名，当调用$container->get('foo')时，可以得到一个
+// yii\db\Connection 实例。
+// $_definition['foo'] = ['class' => 'yii\db\Connection']
+$container->set('foo', 'yii\db\Connection');
+
+// 用一个配置数组来注册一个类，需要这个类的实例时，这个配置数组会发生作用。
+// $_definition['yii\db\Connection'] = [
+//	'class' => 'yii\db\Connection',
+//    'dsn' => 'mysql:host=127.0.0.1;dbname=demo',
+//    'username' => 'root',
+//    'password' => '',
+//    'charset' => 'utf8',
+//];
+$container->set('yii\db\Connection', [
+    'dsn' => 'mysql:host=127.0.0.1;dbname=demo',
+    'username' => 'root',
+    'password' => '',
+    'charset' => 'utf8',
+]);
+
+// 用一个配置数组来注册一个别名，由于别名的类型不详，因此配置数组中需要
+// 有 class 元素。
+// $_definition['db'] = [
+//	'class' => 'yii\db\Connection',
+//    'dsn' => 'mysql:host=127.0.0.1;dbname=demo',
+//    'username' => 'root',
+//    'password' => '',
+//    'charset' => 'utf8',
+//];
+$container->set('db', [
+    'class' => 'yii\db\Connection',
+    'dsn' => 'mysql:host=127.0.0.1;dbname=demo',
+    'username' => 'root',
+    'password' => '',
+    'charset' => 'utf8',
+]);
+
+// 用一个PHP callable来注册一个别名，每次引用这个别名时，这个callable都会被调用。
+// $_definition['db'] = function(...){...}
+$container->set('db', function ($container, $params, $config) {
+    return new \yii\db\Connection($config);
+});
+
+// 用一个对象来注册一个别名，每次引用这个别名时，这个对象都会被引用。
+// $_definition['pageCache'] = anInstanceOfFileCache
+$container->set('pageCache', new FileCache);
+
+
+
+
+
+
+来源  http://www.digpage.com/di.html#id6
+=======================================================
     /**
      * Registers a class definition with this container and marks the class as a singleton class.
      *
@@ -446,7 +512,7 @@ class Container extends Component
     }
 
     /**
-     * Normalizes the class definition.
+     * 规范类定义.
      * @param string $class class name
      * @param string|array|callable $definition the class definition
      * @return array the normalized class definition
@@ -454,10 +520,13 @@ class Container extends Component
      */
     protected function normalizeDefinition($class, $definition)
     {
+		// $definition 是空的转换成 ['class' => $class] 形式
         if (empty($definition)) {
             return ['class' => $class];
+		// $definition 是字符串，转换成 ['class' => $definition] 形式
         } elseif (is_string($definition)) {
             return ['class' => $definition];
+		// $definition 是PHP callable 或对象，则直接将其作为依赖的定义
         } elseif (is_callable($definition, true) || is_object($definition)) {
             return $definition;
         } elseif (is_array($definition)) {
