@@ -37,6 +37,7 @@
 * [atom-ternjs](https://atom.io/packages/atom-ternjs) 补全Js
 * [emmet](https://atom.io/packages/emmet) 前端实用工具 [教程](http://wiki.jikexueyuan.com/project/atom/emmet.html)
 * [docblockr](https://atom.io/packages/docblockr)  代码注释
+
 * [vim-mode](https://atom.io/packages/vim-mode)  在 Atom 上使用 Vim
 * [platformio-ide-terminal](https://atom.io/packages/platformio-ide-terminal)  Atom 中集成终端
 * [atom-beautify](https://atom.io/packages/atom-beautify)  美化代码段   快捷键 `ctrl + alt + b`  ，如果弹出出错信息，可能是需要依赖一些其他插件，比如 php的 就需要装 [php-cs-fixer](https://atom.io/packages/php-cs-fixer) 插件  
@@ -63,6 +64,35 @@
 ) 汉化  
 
 * [goto-definition](https://atom.io/packages/goto-definition) 文件跳转，放到方法或类名上右键 `goto definition` 就会出现列表，选择跳转，有快捷键，还是不用了  
+
+* [remote-ftp](https://atom.io/packages/remote-ftp)  sftp上传工具  
+插件配置：把 `auto upload on save` 由 `aways` 改为 `nerver`  
+
+可以在 `packages->Remote-Ftp->Create ……` 来生成配置文件 `.ftpconfig`  (生成在添加到Atom项目文件根目录，上传的时候也是在根目录中寻找配置文件，限制啊)，上传只能在左边 `menu` 菜单来选中上传和下载 (限制啊)   
+```
+{
+    "protocol": "sftp", # 协议
+    "port": 22, # 端口
+    "host": "128.128.1.79", # ip
+    "user": "root", # 用户
+    "pass": "******", # 密码
+    "promptForPass": false,
+    "remote": "/usr/share/nginx/html/protected", # 对应的项目文件地址
+    "local": "",
+    "agent": "",
+    "privatekey": "",
+    "passphrase": "",
+    "hosthash": "",
+    "ignorehost": true,
+    "connTimeout": 10000,
+    "keepalive": 10000,
+    "keyboardInteractive": false,
+    "remoteCommand": "",
+    "remoteShell": "",
+    "watch": [],
+    "watchTimeout": 500
+}
+```
 
 
 
@@ -164,6 +194,7 @@ table
 2. php开启xdebug  
 win上安装的是wamp所以xdebug都是有的  
 php.ini 配置  
+
 ```
 [xdebug]
 zend_extension ="D:/ding/wamp64/bin/php/php5.6.25/zend_ext/php_xdebug-2.4.1-5.6-vc11-x86_64.dll"
@@ -182,6 +213,7 @@ xdebug.remote_handler=dbgp
 xdebug.remote_mode=req
 xdebug.remote_autostart=true
 ```  
+
 3. 调试  
   1. 开启debug插件 atom左下角debug按钮打开debug，没有监听到时显示的是 `Listening on address:port 127.0.0.1:9000`
   2. 在方法中打断点  (断点要注意了，如果打到空行，或者for循环里面将会无法监听到) 如图  
@@ -206,7 +238,8 @@ xdebug.remote_autostart=true
 添加断点  
 在代码的左边栏上点击，因为比较窄不好点击，也可以使用快捷键  `alt + f9`  
 
-`Continue` 和 `Stop` 按钮功能相似，都是释放掉监听  `alt + f5`  
+`Stop` 释放掉监听  `alt + f5`  
+`Continue` 走向下一个断点
 `Step Over` 一步一步往下走    `alt + f6`  
 `Step In` 进入到方法内     `alt + f7`  
 `Step Out` 跳出方法    `alt + f8`  
