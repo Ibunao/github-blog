@@ -17,7 +17,7 @@
 | file-icons        | yes       |
 | pigments        | no       |
 | minimap        | yes       |
-| autocomplete-paths        | yes       |
+| autocomplete-paths        | no       |
 | atom-ternjs        | no       |
 | emmet        | yes       |
 | docblockr        | yes       |
