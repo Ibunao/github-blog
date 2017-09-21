@@ -222,6 +222,8 @@ xdebug.remote_autostart=true
     如果操作正确将会看到监听状态由 `Listening on address:port 127.0.0.1:9000` 改变成 `Connected` ,此时就可以使用debug调试了  
 
 > 如果没有改变监听状态，可能就是断点打错了，请检查  
+> 如果atom的debug启动不起来，可能是9000端口被占用了，更改插件端口和php.ini 中的xdebug配置的端口即可  
+
 
 **操作详解**  
 进入到断点将会输出一下内容，如下图  
