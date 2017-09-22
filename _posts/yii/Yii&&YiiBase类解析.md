@@ -167,13 +167,18 @@ public static function autoload($className)
 ```php
 public static function createObject($type, array $params = [])
 {
+    // 字符串，代表一个类名、接口名、别名。
     if (is_string($type)) {
+        // 全局容器获取实例，并解决其依赖关系
         return static::$container->get($type, $params);
+    // 是个数组，代表配置数组，必须含有 class 元素。
     } elseif (is_array($type) && isset($type['class'])) {
         $class = $type['class'];
         unset($type['class']);
         return static::$container->get($class, $params, $type);
+    // 是个PHP callable则调用其返回一个具体实例。
     } elseif (is_callable($type, true)) {
+        // 解决回调函数的依赖
         return static::$container->invoke($type, $params);
     } elseif (is_array($type)) {
         throw new InvalidConfigException('Object configuration must be an array containing a "class" element.');

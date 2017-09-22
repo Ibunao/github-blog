@@ -9,6 +9,11 @@ DI目录：
 				.NotInstantiableException.php
 				.ServiceLocator.php
 ```
+## 概要
+1. `Container ` DI 容器负责自动解决构造函数中参数(对象性的)的依赖关系
+2. `ServiceLocator` 服务定位器，注册组件和实例化组件的  
+3. 两者的组合使用是发生在 `Yii::createObject()` 方法，`ServiceLocator` 的 `get()` 方法中调用了 `Yii::createObject()` 方法里使用了容器 `Container`  
+
 ## Instance 类  
 **作用**   
 供Container使用，保存对象的类名，并通过创建它来判断参数是否是对象型的
@@ -894,6 +899,7 @@ $container->set('pageCache', new FileCache);
 [参考](http://www.digpage.com/di.html#id7)  
 
 ## 服务定位器  
+注册组件用的
 
 ```php
 /**
@@ -906,7 +912,7 @@ $container->set('pageCache', new FileCache);
  *
  * For example,
  *
- * ```php
+ *
  * $locator = new \yii\di\ServiceLocator;
  * $locator->setComponents([
  *     'db' => [
@@ -921,7 +927,7 @@ $container->set('pageCache', new FileCache);
  *
  * $db = $locator->get('db');  // or $locator->db
  * $cache = $locator->get('cache');  // or $locator->cache
- * ```
+ *
  *
  * Because [[\yii\base\Module]] extends from ServiceLocator, modules and the application are all service locators.
  *
@@ -936,16 +942,19 @@ $container->set('pageCache', new FileCache);
 class ServiceLocator extends Component
 {
     /**
+     * 用于缓存服务、组件等的实例
      * @var array shared component instances indexed by their IDs
      */
     private $_components = [];
     /**
+     * 用于保存服务和组件的定义，通常为配置数组，可以用来创建具体的实例
      * @var array component definitions indexed by their IDs
      */
     private $_definitions = [];
 
 
     /**
+     * 重载了父类的方法
      * Getter magic method.
      * This method is overridden to support accessing components like reading properties.
      * @param string $name component or property name
@@ -953,9 +962,14 @@ class ServiceLocator extends Component
      */
     public function __get($name)
     {
+		// has() 方法就是判断 $_definitions 数组中是否已经保存了服务或组件的定义
+    	// 请留意，这个时候服务或组件仅是完成定义，不一定已经实例化
         if ($this->has($name)) {
+			// get() 方法用于返回服务或组件的实例
             return $this->get($name);
         } else {
+			// 未定义的服务或组件，那么视为正常的属性、行为，
+    		// 调用 yii\base\Component::__get()
             return parent::__get($name);
         }
     }
@@ -976,6 +990,8 @@ class ServiceLocator extends Component
     }
 
     /**
+     * 当 $checkInstance === false 时，用于判断是否已经定义了某个服务或组件
+     * 当 $checkInstance === true 时，用于判断是否已经有了某人服务或组件的实例
      * Returns a value indicating whether the locator has the specified component definition or has instantiated the component.
      * This method may return different results depending on the value of `$checkInstance`.
      *
@@ -995,6 +1011,7 @@ class ServiceLocator extends Component
     }
 
     /**
+     * 根据 $id 获取对应的组件实例
      * Returns the component instance with the specified ID.
      *
      * @param string $id component ID (e.g. `db`).
@@ -1007,15 +1024,18 @@ class ServiceLocator extends Component
      */
     public function get($id, $throwException = true)
     {
+		// 如果已经有实例化好的组件或服务，直接使用缓存中的就OK了
         if (isset($this->_components[$id])) {
             return $this->_components[$id];
         }
-
+		// 如果还没有实例化好，那么再看看是不是已经定义好
         if (isset($this->_definitions[$id])) {
             $definition = $this->_definitions[$id];
+			// 如果定义是个对象，且不是Closure对象，那么直接将这个对象返回
             if (is_object($definition) && !$definition instanceof Closure) {
                 return $this->_components[$id] = $definition;
             } else {
+				// 是个数组或者PHP callable，调用 Yii::createObject()来创建一个实例
                 return $this->_components[$id] = Yii::createObject($definition);
             }
         } elseif ($throwException) {
@@ -1026,11 +1046,13 @@ class ServiceLocator extends Component
     }
 
     /**
+     * 用于注册一个组件或服务，其中 $id 用于标识服务或组件。
+     * $definition 可以是一个类名，一个配置数组，一个PHP callable，或者一个对象
      * Registers a component definition with this locator.
      *
      * For example,
      *
-     * ```php
+     *
      * // a class name
      * $locator->set('cache', 'yii\caching\FileCache');
      *
@@ -1050,7 +1072,7 @@ class ServiceLocator extends Component
      *
      * // an instance
      * $locator->set('cache', new \yii\caching\FileCache);
-     * ```
+     *
      *
      * If a component definition with the same ID already exists, it will be overwritten.
      *
@@ -1070,16 +1092,20 @@ class ServiceLocator extends Component
      */
     public function set($id, $definition)
     {
+		// 确保服务或组件ID的唯一性
         unset($this->_components[$id]);
 
+		// 当定义为 null 时，表示要从Service Locator中删除一个服务或组件
         if ($definition === null) {
             unset($this->_definitions[$id]);
             return;
         }
-
+		// 定义如果是个对象或PHP callable，或类名，直接作为定义保存
+    	// 留意这里 is_callable的第二个参数为true，所以，类名也可以。
         if (is_object($definition) || is_callable($definition, true)) {
             // an object, a class name, or a PHP callable
             $this->_definitions[$id] = $definition;
+		// 定义如果是个数组，要确保数组中具有 class 元素
         } elseif (is_array($definition)) {
             // a configuration array
             if (isset($definition['class'])) {
@@ -1112,6 +1138,7 @@ class ServiceLocator extends Component
     }
 
     /**
+     * 循环调用 set()
      * Registers a set of component definitions in this locator.
      *
      * This is the bulk version of [[set()]]. The parameter should be an array
@@ -1123,7 +1150,7 @@ class ServiceLocator extends Component
      *
      * The following is an example for registering two component definitions:
      *
-     * ```php
+     *
      * [
      *     'db' => [
      *         'class' => 'yii\db\Connection',
@@ -1134,7 +1161,7 @@ class ServiceLocator extends Component
      *         'db' => 'db',
      *     ],
      * ]
-     * ```
+     *
      *
      * @param array $components component definitions or instances
      */
@@ -1148,3 +1175,4 @@ class ServiceLocator extends Component
 
 
 ```
+[参考](http://www.digpage.com/service_locator.html)  
