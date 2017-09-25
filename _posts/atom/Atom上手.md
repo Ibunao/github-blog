@@ -275,3 +275,11 @@ xdebug.remote_autostart=true
     'prefix': 'vy'
     'body': '<?=$${1:this} ;?>'
 ```
+
+## Atom问题与解决  
+1. 打开多个窗口时，在一个窗口添加项目，项目目录变的不可见点击并会报错  
+解决 ：
+[参考](https://github.com/atom/atom/issues/14716)
+> 注意：先保存任何未保存的作业
+
+win系统cmd运行 `atom --clear-window-state`  即可  
