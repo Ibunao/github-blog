@@ -94,6 +94,13 @@
 }
 ```
 
+Markdown相关  
+[Markdown相关](http://www.cnblogs.com/libin-1/p/6638165.html)  
+[Markdown相关](http://www.jianshu.com/p/b4c8479cfaa5)  
+
+[markdown-scroll-sync](https://atom.io/packages/markdown-scroll-sync)  预览同步滚动  
+[tidy-markdown](https://atom.io/packages/tidy-markdown) Markdown美化，在保存的时候或者主动调用插件时触发
+
 
 
 
