@@ -272,7 +272,7 @@ xdebug.remote_autostart=true
 
 [xdebug使用](http://blog.csdn.net/frycn/article/details/68925991) [xdebug使用](http://www.jianshu.com/p/74a1d60ab5ef) [xdebug使用](http://www.jianshu.com/p/e9ad4c99d118) [xdebug使用](http://www.taovq.com/index.php/archives/102/) [xdebug相关](http://philix.iteye.com/blog/960606) [xdebug相关](https://segmentfault.com/a/1190000009500015) [mac 安装](http://www.alliedjeep.com/139216.htm)
 
-## 设置代码段 snippet
+## 设置代码段 snippet 代码块
 
 > 有一点不好的是，只能在某个语言环境中触发为某个语言设置的代码段
 
