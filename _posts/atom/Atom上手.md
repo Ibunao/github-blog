@@ -112,6 +112,30 @@ Markdown相关<br>
 [markdown-scroll-sync](https://atom.io/packages/markdown-scroll-sync) 预览同步滚动<br>
 [tidy-markdown](https://atom.io/packages/tidy-markdown) Markdown美化，在保存的时候或者主动调用插件时触发
 
+python相关  
+编辑器里运行直接运行代码 `js、python` 等都可以  
+[atom-runer编辑器运行代码](https://atom.io/packages/atom-runner)  
+快捷键看插件介绍  
+win配置  
+```
+File->Config...
+末尾添加  
+runner:
+  scopes:
+    python: "D:\\ding\\python"
+```
+mac配置  
+```
+File->Config...
+末尾添加  
+    runner:
+        python: "/usr/local/bin/python3"
+```
+
+[autocomplete-python自动提示](https://atom.io/packages/autocomplete-python)
+
+
+
 ### 装逼神奇
 
 - [activate-power-mode](https://atom.io/packages/activate-power-mode) 颤抖吧
