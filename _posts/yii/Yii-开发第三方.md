@@ -113,7 +113,7 @@ git tag v0.0.1
 推送到github
 git push origin --tags
 ```
-在 [packagist插件](https://packagist.org/packages/ibunao/yii2-waneditor) 点击 `update` 进行更新，可以看到右下边显示出了版本号，之后就可以使用composer进行安装了  
+在 [packagist插件](https://packagist.org/packages/ibunao/yii2-weditor) 点击 `update` 进行更新，可以看到右下边显示出了版本号，之后就可以使用composer进行安装了  
 
 composer安装了
 > 本地项目删除自动加载，删除此插件  
