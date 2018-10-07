@@ -1,17 +1,25 @@
+---
+title: Atom-上手
+date: 2017-07-01 11:56:02
+tags:
+    - 工具
+categories: 
+    - 工具  
+    - Atom  
+---
 # Atom使用教程
-
+详细的操作可以参考下面的教程  
 [极客学院](http://wiki.jikexueyuan.com/project/atom/) [W3C](https://www.w3cschool.cn/atom/z3fq1hr1.html)
-
-# win7环境
 
 ## 删除Atom
 
 使用的360进行删除，删除后会发现 `C:\Users\你的用户名\` 有一个隐藏的文件夹 `.atom` 将其删除，不删除的话重新安装atom的时候依旧会保留原来的配置及插件
-
+<!-- more -->
 ## 插件
 
-安装完 Atom 之后自带了79个插件，基本的功能都已经可以使用了<br>
-**安装插件**
+安装完 Atom 之后自带了79个插件，基本的功能都已经可以使用了<br> 
+
+### 安装插件
 
 > 在 setting 页面可以看到 `Packages` 和 `Install` 两个选项， `Packages` 查看已经安装的插件， `Install` 来安装插件的，可以使用 `ctrl+Shift+p` 进入这个页面
 
@@ -126,7 +134,7 @@ runner:
 ```
 mac配置  
 ```
-File->Config...
+Atom->Config...
 末尾添加  
     runner:
         python: "/usr/local/bin/python3"
@@ -171,7 +179,7 @@ cmd + shift + d         复制选中代码并粘贴到选中的后面
 cmd + shift + u         选择文件编码格式
 ```
 
-### 折叠
+### 折叠  
 
 ```
 Alt + Ctrl + [          折叠
@@ -180,13 +188,13 @@ Alt + Ctrl + Shift + {  折叠全部
 Alt + Ctrl + Shift + }  展开全部
 ```
 
-### Markdown 写作
+### Markdown  
 
 ```
 Ctrl + Shift + M        Markdown预览
 ```
 
-#### Markdown 语法补全
+### Markdown 语法补全
 
 ````
 b                       **加粗**
@@ -229,9 +237,7 @@ table
 2. 如果没有，则需要创建一个：起个名称(用途)，写个简介
 3. 获取 `Gist Id`，进入创建好的 `Gist` 看到连接 `https://gist.github.com/Ibunao/654a98d3e154348eaebba448312b0152` 其中 `654a98d3e154348eaebba448312b0152` 就是 `Gist Id`
 
-## 问题
 
-1. `ctrl+,` 快捷键无法打开 setting ,可能是因为快捷键冲突
 
 ## xdebug调试
 
@@ -314,6 +320,9 @@ xdebug.remote_autostart=true
     'prefix': 'vy'
     'body': '<?=$${1:this} ;?>'
 ```
+## 问题
+
+1. `ctrl+,` 快捷键无法打开 setting ,可能是因为快捷键冲突  
 
 ## Atom问题与解决
 
@@ -323,3 +332,5 @@ xdebug.remote_autostart=true
   > 注意：先保存任何未保存的作业
 
 win系统cmd运行 `atom --clear-window-state` 即可
+
+
