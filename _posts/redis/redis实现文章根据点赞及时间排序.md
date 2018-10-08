@@ -7,8 +7,8 @@ categories:
     - redis实战    
 ---
 ## redis教程和命令  
-[redis教程和命令](http://www.redis.net.cn/order/)  
-
+[redis教程和命令](http://www.redis.net.cn/order/)   
+[Redis 命令参考](http://redisdoc.com/)  
 ## 需求：
 1. 根据对文章的点赞数来计算文章受欢迎程度，假设一篇文章至少需要200个赞才算有趣的文章，有趣的文章要求保留在列表前排至少 1 天  
 2. 对文章进行分组，文章分值排序同样作用与一个组内的文章    
@@ -21,7 +21,7 @@ categories:
 <!--more-->
 
 ## redis数据结构  
-存储文章的  **hash** 结构 
+存储文章的  **hash** 结构
 数据结构 以文章 1 为例  
 
 | 字段 | 值 | 备注|
@@ -40,7 +40,7 @@ categories:
 | key | time: | redis的key|
 | value |  | redis的值，值的结构如下 |
 |  | article:1 | 123456789 |
-|  | article:2 | 123456666 | 
+|  | article:2 | 123456666 |
 
 根据文章评分排序文章的有序集合 **zset**  
 
