@@ -1,3 +1,13 @@
+---
+title: Yii-RBAC
+date: 2018-10-11 00:00:02
+tags:
+    - yii
+    - RBAC
+    - yii-admin
+categories:
+    - yii  
+---
 
 ## 说明  
 可以先参看 [中文官方文档](https://www.yiichina.com/doc/guide/2.0/security-authorization)  
@@ -122,17 +132,68 @@ yii migrate --migrationPath=@mdm/admin/migrations
 
 ![test](/images/yii/rbac/admin-test3.png)
 
-<<<<<<< HEAD
-![test](/images/yii/rbac/admin-test3.png)  
-=======
 ![test](/images/yii/rbac/admin-test3.png)
 ### 规则 rule  
-规则是对权限的补充，算是细分的权限，一般权限是对应这路由的，而规则可以更细一点，比方说一个角色没有更新文章的权限，但是可以有更新自己文章的权限，这个时候就用到rule了  
+规则是对权限的补充，算是细分的权限，一般权限是对应这路由的，而规则可以更细一点，比方说一个角色没有更新文章的权限，但是他需要更新自己文章的权限，这时就需要给他赋值更新文章的权限，但是这样他权限就太大了，因为还可以更新别人的文章，这时就需要给他增加一个rule，来验证这篇文章是否属于自己，如果不属于自己则依旧没权限  
+
+我们以官网使用rule为例子 [这里](https://www.yiichina.com/doc/guide/2.0/security-authorization) 来用 yii-admin 的方式实现  
 
 
 首先创建 rule 类, 如下    
 ```php
+<?php
+namespace backend\rbac;
+
+use yii\rbac\Rule;
+
+/**
+ * 创建规则，相对于路由(权限)的权限更加细分
+ * 如果该用户满足某个路由(权限)，但是不满足规则依旧不可以访问
+ */
+class AuthorRule extends Rule
+{
+    // 规则名
+    public $name = 'isAuthor';
+
+    /**
+     * @param string|integer $user 用户 ID.
+     * @param Item $item 该规则相关的角色或者权限
+     * @param array $params get参数
+     * @return boolean 代表该规则相关的角色或者权限是否被允许
+     */
+    public function execute($user, $item, $params)
+    {
+        /**
+         * 请求 和参数值 route:http://admin.yiilearn.com/test/index3?id=10
+{
+    "user": 2,
+    "item": {
+        "type": "2",
+        "name": "updateOwnPost",
+        "description": "更新自己的",
+        "ruleName": "isAuthor",
+        "data": {
+            "abc": "cba"
+        },
+        "createdAt": "1539229574",
+        "updatedAt": "1539229574"
+    },
+    "params": {
+        "id": "10"
+    }
+}
+         */
+        // echo json_encode(['user' => $user, 'item' => $item, 'params' => $params]);exit;
+        // 直接返回false表示拒绝，具体的实现可以通过参数进行逻辑判断  
+        return false;
+    }
+}
 ```
+我们现在已经有 ibunao 用户了，角色(role1)、权限、路由如下  
+![rule](/images/yii/rbac/admin-rule7.png)  
+![rule](/images/yii/rbac/admin-rule8.png)  
+
+现在我们添加用户 jidan 用户，为了让其访问 `/test/index3`  
 
 添加rule  
 
@@ -142,7 +203,7 @@ yii migrate --migrationPath=@mdm/admin/migrations
 
 ![rule](/images/yii/rbac/admin-rule2.png)  
 
-为权限或者角色添加rule  
+增加权限绑定rule  
 
 ![rule](/images/yii/rbac/admin-rule3.png)
 
@@ -150,25 +211,50 @@ yii migrate --migrationPath=@mdm/admin/migrations
 
 ![rule](/images/yii/rbac/admin-rule4.png)
 
-#### 发现错误  
-添加完了我们验证一下   
-![rule](/images/yii/rbac/admin-rule5.png)  
-发现无权限(正常)，并且没有走rule，这是因为什么呢？  
-还记得 文章开头 **说明** 部分将的yii、yii-admin验证的区别么？  
-yii-admin 验证的时候验证的是 route ，也就是 `/goods/index`，验证的rule当然也就是 `/goods/index` 绑定的 rule  
-而我错误的将 rule 设置到了 权限 test1 上了，但是这个先不用改，我们来验证一下 yii验证 和 yii-admin验证的区别  
-为了使用 yii 的验证，我们需要改动两个地方  
+然后就是创建角色 role2, 并绑定用户 jidan    
+
+![rule](/images/yii/rbac/admin-rule9.png)
+
+
+#### Rule类进行检验  
+我们可以直接在 `execute()` 方法中返回 `true` 或 `false` , 请求 `http://admin.yiilearn.com/test/index3?id=10` 会发现分别是可以访问和拒绝访问，表示我们设置的rule已经生效了  
+我们可以根据传过来的参数来进行自己的逻辑判断，来进行拒绝和通过  
 ```php
-配置文件 config/main.php 注释掉 使用 yii-admin 验证的部分  
+请求:http://admin.yiilearn.com/test/index3?id=10  
+execute 方法接收到的参数
+{
+    "user": 2, # 用户id
+    "item": { # 权限信息
+        "type": "2",
+        "name": "updateOwnPost",
+        "description": "更新自己的",
+        "ruleName": "isAuthor",
+        "data": {
+            "abc": "cba"
+        },
+        "createdAt": "1539229574",
+        "updatedAt": "1539229574"
+    },
+    "params": { # 请求参数
+        "id": "10"
+    }
+}
+```
+
+#### 使用yii的验证  
+
+```php
+1. 配置文件 config/main.php 注释掉 使用 yii-admin 验证的部分或者允许test/index3进行访问  
 // 'as access' => [
 //     'class' => 'mdm\admin\components\AccessControl',
 //     'allowActions' => [
 //         'site/*',//允许访问的节点，可自行添加
 //         'admin/*',//允许所有人访问admin节点及其子节点
+//         //'test/index3'
 //     ]
 // ],
-
-在 GoodsController 控制器添加验证，这个忘记的可以参看 AFC验证 部分    
+2. 在使用的类加过滤器  
+在 TestController 控制器添加验证，这个忘记的可以参看 AFC验证 部分    
 public function behaviors()
 {
     return [
@@ -176,23 +262,39 @@ public function behaviors()
             'class' => AccessControl::className(),
             'rules' => [
                 [
-                    'actions' => ['index'],
+                    'actions' => ['index3'],
                     'allow' => true,
-                    'roles' => ['role1'],
+                    'roles' => ['/test/index3'],
                     'roleParams' => ['a', 'b', 'c'],
                 ],
             ],
         ],
     ];
 }
+
+这是 execute 方法接收的参数为  
+{
+    "user": 2, # 用户id
+    "item": { # 权限详情
+        "type": "2",
+        "name": "updateOwnPost",
+        "description": "更新自己的",
+        "ruleName": "isAuthor",
+        "data": {
+            "abc": "cba"
+        },
+        "createdAt": "1539229574",
+        "updatedAt": "1539229574"
+    },
+    "params": [ # roleParams 配置的参数
+        "a",
+        "b",
+        "c"
+    ]
+}
 ```
-你会发现很自然的通过了，因为这个检验的逻辑是判断当前用户是访问 `goods/index` 时，用户的角色是否是 `role1`,符合也就很自然的通过了  
 
-#### 更正  
-将代码改回 yii-admin 验证  
-首先我们要添加
 
->>>>>>> 8124fc1b1c91734b1ae78a0f99b4606eba765757
 ### 用户列表  
 `yii-admin` 为后台也提供了一系列的用户操作功能（注册、改密码等），但是默认是没有显示的，需要自己根据自己的需要添加按钮  
 
