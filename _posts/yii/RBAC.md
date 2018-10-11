@@ -120,7 +120,7 @@ yii migrate --migrationPath=@mdm/admin/migrations
 
 ![test](/images/yii/rbac/admin-test3.png)
 
-![test](/images/yii/rbac/admin-test3.png)
+![test](/images/yii/rbac/admin-test3.png)  
 ### 用户列表  
 `yii-admin` 为后台也提供了一系列的用户操作功能（注册、改密码等），但是默认是没有显示的，需要自己根据自己的需要添加按钮  
 
@@ -153,7 +153,9 @@ yii migrate --migrationPath=@mdm/admin/migrations
         ...
 </div>
 ```
+
 ### 目录 menu  
+
 `yii-admin` 增加了目录功能，可以设置目录，然后根据用户的权限来显示目录  
 
 增加目录，数据的作用会在后面说  
