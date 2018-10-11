@@ -3,6 +3,8 @@
 可以先参看 [中文官方文档](https://www.yiichina.com/doc/guide/2.0/security-authorization)  
 yii 为我们提供的两种存储方式一种是文件方式一种是数据库方式，这里我们直接使用数据库的方式，yii 文档给的是直接写代码执行的方式，这种虽然更灵活，但是不够直观，而且最常用到的地方就是后台，所以我们使用可视化的模块 `yii-admin`  
 
+> `yii-admin` 扩展过的rbac 和 yii 自带的有一点区别的是权限，yii以权限为基础，而 `yii-admin` 是以路由为基础的，这一点会在验证的时候进行体现, yii的是`Yii::$app->user->can(role||permission, params)` ，而 yii-admin 的是 `Yii::$app->user->can(route, params)`  
+
 ## 准备  
 首先安装 `yii-admin` 扩展，[github地址](https://github.com/mdmsoft/yii2-admin)   
 ### 创建表  
@@ -115,12 +117,82 @@ yii migrate --migrationPath=@mdm/admin/migrations
 
 ![assignment](/images/yii/rbac/admin-assignment3.png)  
 
-### 测试结果  
+#### 测试结果  
 ![test](/images/yii/rbac/admin-test3.png)
 
 ![test](/images/yii/rbac/admin-test3.png)
 
+<<<<<<< HEAD
 ![test](/images/yii/rbac/admin-test3.png)  
+=======
+![test](/images/yii/rbac/admin-test3.png)
+### 规则 rule  
+规则是对权限的补充，算是细分的权限，一般权限是对应这路由的，而规则可以更细一点，比方说一个角色没有更新文章的权限，但是可以有更新自己文章的权限，这个时候就用到rule了  
+
+
+首先创建 rule 类, 如下    
+```php
+```
+
+添加rule  
+
+![rule](/images/yii/rbac/admin-rule1.png)
+
+对应表的变化  
+
+![rule](/images/yii/rbac/admin-rule2.png)  
+
+为权限或者角色添加rule  
+
+![rule](/images/yii/rbac/admin-rule3.png)
+
+对应表的变化  
+
+![rule](/images/yii/rbac/admin-rule4.png)
+
+#### 发现错误  
+添加完了我们验证一下   
+![rule](/images/yii/rbac/admin-rule5.png)  
+发现无权限(正常)，并且没有走rule，这是因为什么呢？  
+还记得 文章开头 **说明** 部分将的yii、yii-admin验证的区别么？  
+yii-admin 验证的时候验证的是 route ，也就是 `/goods/index`，验证的rule当然也就是 `/goods/index` 绑定的 rule  
+而我错误的将 rule 设置到了 权限 test1 上了，但是这个先不用改，我们来验证一下 yii验证 和 yii-admin验证的区别  
+为了使用 yii 的验证，我们需要改动两个地方  
+```php
+配置文件 config/main.php 注释掉 使用 yii-admin 验证的部分  
+// 'as access' => [
+//     'class' => 'mdm\admin\components\AccessControl',
+//     'allowActions' => [
+//         'site/*',//允许访问的节点，可自行添加
+//         'admin/*',//允许所有人访问admin节点及其子节点
+//     ]
+// ],
+
+在 GoodsController 控制器添加验证，这个忘记的可以参看 AFC验证 部分    
+public function behaviors()
+{
+    return [
+        'access' => [
+            'class' => AccessControl::className(),
+            'rules' => [
+                [
+                    'actions' => ['index'],
+                    'allow' => true,
+                    'roles' => ['role1'],
+                    'roleParams' => ['a', 'b', 'c'],
+                ],
+            ],
+        ],
+    ];
+}
+```
+你会发现很自然的通过了，因为这个检验的逻辑是判断当前用户是访问 `goods/index` 时，用户的角色是否是 `role1`,符合也就很自然的通过了  
+
+#### 更正  
+将代码改回 yii-admin 验证  
+首先我们要添加
+
+>>>>>>> 8124fc1b1c91734b1ae78a0f99b4606eba765757
 ### 用户列表  
 `yii-admin` 为后台也提供了一系列的用户操作功能（注册、改密码等），但是默认是没有显示的，需要自己根据自己的需要添加按钮  
 
