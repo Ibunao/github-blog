@@ -28,6 +28,7 @@ public function encryptByPassword($data, $password)
     ...
 }
 ```
+<!-- more -->
 通过上面加密的数据和key获得原数据  
 ```php
 /**

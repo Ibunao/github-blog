@@ -45,6 +45,7 @@ class SiteController extends Controller
 ### AccessControl过滤器   
 > 注意，如果AccessControll配置的需要验证的action，在配置的rules中如果验证没有通过或者没有rule来验证当前请求的action(也就是不符合所有rule需要验证的action)都会拒绝访问  
 
+<!-- more -->
 ####  `only` 和 `except` 配置  
 `only` 表示需要验证的 `actionId` ,如果为空，这个控制器的所有action都将会向下进行验证逻辑  
 
