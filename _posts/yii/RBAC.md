@@ -22,6 +22,7 @@ yii 为我们提供的两种存储方式一种是文件方式一种是数据库�
 ```
 yii migrate --migrationPath=@yii/rbac/migrations
 ```
+<!-- more -->
 将会创建四张表  
 itemTable： 该表存放授权条目（译者注：即角色和权限）。默认表名为 "auth_item" 。
 itemChildTable： 该表存放授权条目的层次关系。默认表名为 "auth_item_child"。
@@ -128,9 +129,9 @@ yii migrate --migrationPath=@mdm/admin/migrations
 ![assignment](/images/yii/rbac/admin-assignment3.png)  
 
 #### 测试结果  
-![test](/images/yii/rbac/admin-test3.png)
+![test](/images/yii/rbac/admin-test1.png)
 
-![test](/images/yii/rbac/admin-test3.png)
+![test](/images/yii/rbac/admin-test2.png)
 
 ![test](/images/yii/rbac/admin-test3.png)
 ### 规则 rule  
