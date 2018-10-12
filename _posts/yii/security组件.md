@@ -158,6 +158,7 @@ public function unmaskToken($maskedToken)
 Yii csrf   
 获取csrftoken  
 ```php
+yii\web\Request
 /**
  * 获取csrftoken
  * 如果cookie或session中不存在则生成csrftoken
@@ -197,6 +198,7 @@ protected function generateCsrfToken()
 ```
 验证csrftoken  
 ```php
+yii\web\Request
 /**
  * 验证csrf
  * Performs the CSRF validation.
