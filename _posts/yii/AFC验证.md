@@ -10,7 +10,7 @@ categories:
 
 
 ## 实例  
-```
+```php
 use yii\web\Controller;
 use yii\filters\AccessControl;
 
@@ -73,7 +73,7 @@ class SiteController extends Controller
 'denyCallback' => function ($rule, $action){},  
 ```
 最后两个参数也是验证的关键  
-```
+```php
 role => ['@', '?', 'otherRole']
 
 ? : 表示允许未登录的访问  

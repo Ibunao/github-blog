@@ -19,7 +19,7 @@ yii 为我们提供的两种存储方式一种是文件方式一种是数据库�
 首先安装 `yii-admin` 扩展，[github地址](https://github.com/mdmsoft/yii2-admin)   
 ### 创建表  
 两条命令，首先创建yii自带的rbac相关表  
-```
+```php
 yii migrate --migrationPath=@yii/rbac/migrations
 ```
 <!-- more -->
