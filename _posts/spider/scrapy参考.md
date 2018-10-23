@@ -1,7 +1,17 @@
-[toc]  
+---
+title: 爬虫-scrapy  
+date: 2018-10-23 20:00:02
+tags:
+    - python
+    - scrapy
+    - 爬虫
+categories:
+    - python
+    - 爬虫  
+---
 
 ## 实现项目    
-### 1. 创建项目  
+### 创建项目  
 ```python
 scrapy startproject cancao # 将会创建cankao项目目录及文件  
 
@@ -25,7 +35,7 @@ cankao/middlewares.py # 中间件
 cankao/spiders/ # 存储爬虫代码目录
 
 ```
-#### 1.1 创建爬虫  
+#### 创建爬虫  
 ```python
 # 进入到项目目录
 cd cankao
@@ -53,6 +63,7 @@ class Cankao1Spider(scrapy.Spider):
         '''
         pass
 ```
+<!--more-->
 我们对网页进行分析获取需要的内容  
 ```python
 # -*- coding: utf-8 -*-
@@ -100,7 +111,7 @@ class Cankao1Spider(scrapy.Spider):
         # 分析下一个请求,进行请求（测试一下allowed_domains，不属于不能请求）
         # yield Request(url='http://www.bunao.win')
 ```  
-#### 1.2 执行爬虫  
+#### 执行爬虫  
 执行爬虫命令 `scrapy crawl cankao1` ，执行后可以看到输出的执行信息，方便进行分析  
 此时可能并没有输出所期望的数据，我们需要修改配置参数  
 ```python
@@ -114,7 +125,7 @@ ROBOTSTXT_OBEY = False
 ```
 此时，我们执行 `scrapy crawl cankao1 --nolog` 来查看不带执行信息的输入内容  
 
-### 2. 创建item  
+### 创建item  
 创建 `item` 就比较简单了，主要是用来存放保存信息的  
 ```python
 import scrapy
@@ -128,8 +139,8 @@ class CankaoItem(scrapy.Item):
     img = scrapy.Field()
     content = scrapy.Field()
 ```
-### 3. 创建 pipeline , 存储数据   
-#### 3.1 数据保存到文件  
+### 创建 pipeline , 存储数据   
+#### 数据保存到文件  
 ```python
 import json
 from scrapy.exceptions import DropItem
@@ -198,7 +209,7 @@ ITEM_PIPELINES = {
    'cankao.pipelines.CankaoPipeline': 300,
 }
 ```
-#### 3.2 数据保存到mongo  
+#### 数据保存到mongo  
 ```python
 from pymongo import MongoClient
 
@@ -281,7 +292,7 @@ MONGO_URI = '118.25.38.240'
 MONGO_PORT = 27017
 MONGO_DATABASE = 'fecshop_test'
 ```
-#### 3.3 下载文件(自定义文件名)  
+#### 下载文件(自定义文件名)  
 ```python
 import scrapy
 from scrapy.pipelines.files import FilesPipeline
@@ -578,7 +589,7 @@ COOKIES_ENABLED = True
 ## 其他    
 ### debug 模式启动 || 多爬虫启动   
 创建文件 `cankao3.py`, 内容如下    
-```
+```python
 from cankao.spiders.cankao1 import Cankao1Spider
 from scrapy.utils.project import get_project_settings
 from scrapy.crawler import CrawlerProcess
@@ -610,12 +621,12 @@ if __name__ == '__main__':
     my_run1()
 ```
 
-### ~~分析xpath是否正确~~   
-> win系统无法使用   
+### 分析xpath是否正确   
+> win系统无法使用,mac正常     
 
 ```python
 1. 执行
-scrapy shell 'www.bunao.me' # 执行要分析页面地址   
+scrapy shell 'www.bunao.win' # 执行要分析页面地址   
 2. 获得返回数据后，执行  
 response.xpath('//a')  # response对象就是上一步返回的对象，执行自己的xpath表达式，查看结果是否正确  
 

@@ -1,15 +1,27 @@
-
+---
+title: 爬虫-xpath  
+date: 2018-10-23 20:00:02
+tags:
+    - python
+    - scrapy
+    - 爬虫
+    - xpath
+categories:
+    - python
+    - xpath  
+---
 
 ## 语法  
 百度吧  
 看过之后可以通过后面的 应用 部分理解一下  
 ## 获得 xpath 路径   
-通过chrome浏览器可以右键来查看  
+通过chrome浏览器可以右键来查看   
+<!--more-->
 ![xpath](/images/scrapy/scrapy-xpath1.png)
 
 ## 应用  
 
-```
+```python
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
