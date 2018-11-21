@@ -17,7 +17,7 @@ categories:
 composer require --prefer-dist moonlandsoft/yii2-phpexcel "*"
 ```
 安装后 `vendor` 目录下将会多两个文件夹 `moonlandsoft/yii-phpexcel` 和 `phpoffice/phpexcel`  
-
+<!-- more -->
 ### 下载excel   
 #### 一表单sheet  
 看代码吧，注释已经很清楚了  

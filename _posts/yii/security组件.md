@@ -449,9 +449,10 @@ public function generateRandomString($length = 32)
     ...
 }
 ```
-实例：  
+<!-- 实例：  
 ```php
-```
+
+``` -->
 
 
 ## compareString 比较字符串
