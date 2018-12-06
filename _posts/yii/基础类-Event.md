@@ -33,11 +33,11 @@ public $data;               // 事件相关数据，事件绑定on时传递的�
  * 绑定类级别的事件
  *
  * 实例，在插入数据后触发记录日志
- * ```php
+ *
  * Event::on(ActiveRecord::className(), ActiveRecord::EVENT_AFTER_INSERT, function ($event) {
  *     Yii::trace(get_class($event->sender) . ' is inserted.');
  * });
- * ```
+ * 
  *
  * @param string $class 类全名()
  * @param string $name 事件名称

@@ -69,7 +69,6 @@ return [
 ### 创建控制器   
 创建控制器就更简单了  
 ```php
-<?php
 namespace restful\controllers;
 
 use Yii;
