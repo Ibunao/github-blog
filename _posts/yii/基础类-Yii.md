@@ -27,6 +27,7 @@ Yii::$classMap = require(__DIR__ . '/classes.php');
 // 容器
 Yii::$container = new yii\di\Container();
 ```
+<!-- more -->
 ### 自动加载逻辑  
 ```php
 public static function autoload($className)

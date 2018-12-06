@@ -33,6 +33,7 @@ public static function configure($object, $properties)
     return $object;
 }
 ```
+<!-- more -->
 ### 获取当前类名  
 获取当前类的类名包含命名空间  
 

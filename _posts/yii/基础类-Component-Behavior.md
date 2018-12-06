@@ -29,7 +29,7 @@ public function __call($name, $params)
         get_class($this) . "::$name()");
 }
 ```
-
+<!-- more -->
 ## Event-事件功能  
 > $handler 事件处理程序  
 

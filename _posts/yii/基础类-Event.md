@@ -26,6 +26,7 @@ public $sender;             // 事件发布者，通常是调用了 trigger() �
 public $handled = false;    // 是否终止事件的后续处理
 public $data;               // 事件相关数据，事件绑定on时传递的数据
 ```
+<!-- more -->
 ### 绑定类级别事件
 
 ```php
@@ -37,7 +38,7 @@ public $data;               // 事件相关数据，事件绑定on时传递的�
  * Event::on(ActiveRecord::className(), ActiveRecord::EVENT_AFTER_INSERT, function ($event) {
  *     Yii::trace(get_class($event->sender) . ' is inserted.');
  * });
- * 
+ *
  *
  * @param string $class 类全名()
  * @param string $name 事件名称
