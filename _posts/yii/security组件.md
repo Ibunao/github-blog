@@ -304,7 +304,7 @@ if (Yii::$app->getSecurity()->validatePassword($password, $hash) {
     // password is bad
 }
 ```
-### 数据的防篡改  
+### 数据的防篡改(也算加解密)  
 #### hashData & validateData  
 就是我给你看，但是你不能改  
 对原始数据进行加密，然后拼接原始数据  
