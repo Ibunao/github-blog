@@ -74,7 +74,7 @@ www.yiibasic.com
 ### getServerName() 也是返回域名 和 getHostName一样  
 
 ## url相关  
-### getUrl() 返回当前请求域名后的所有内容  
+### getUrl() 返回当前请求(域名后的所有内容)  
 如  
 `http://localhost/learn/yii/yiilearn/basic/web/index.php/test/request`   
 返回  
