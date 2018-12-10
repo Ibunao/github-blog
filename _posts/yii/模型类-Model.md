@@ -4,6 +4,7 @@ date: 2017-07-03 11:56:02
 tags:
 	- yii
 	- model
+	- 验证器
 categories:
     - yii
     - model
@@ -30,7 +31,7 @@ public function actionModel()
     }
 }
 ```
-
+<!-- more -->
 ## 属性标签  
 属性标签多用在小部件展示字段的时候显示的字段名，默认情况下，属性标签通过 `yii\base\Model::generateAttributeLabel()` 方法自动从属性名生成. 它会自动将驼峰式大小写变量名转换为多个首字母大写的单词， 例如 `username` 转换为 `Username` ， `firstName` 转换为 `First Name`。
 
@@ -168,6 +169,9 @@ $model = new Model(['scenario' => 'login']);
 
 ## 验证规则  
 为什么写在场景之后，因为用到场景啊  
+
+### 示例  
+
 先看一下下面的内容，之后我们在分析原理，内容来自[官方文档](https://www.yiichina.com/doc/guide/2.0/structure-models)  
 
 当模型接收到终端用户输入的数据，数据应当满足某种规则(称为 验证规则, 也称为 业务规则)。
@@ -219,6 +223,7 @@ public function rules()
 一个属性只会属于`scenarios()`中定义的活动属性且在 `rules()` 申明对应一条或多条活动规则的情况下被验证。
 ### 原理  
 根据 `rules` 中定义的规则生成验证器，然后在根据场景来获取到需要验证的字段进行验证  
+
 ### 使用  
 
 #### rules 配置  
@@ -231,26 +236,82 @@ public function rules()
         [['username', 'email', 'password'], 'required', 'on' => 'register'],
 		// 验证之前会先执行 when 定义的匿名函数，如果返回的true才往后进行验证。 参数：(当前模型对象, 验证的属性)
         [['username', 'email', 'password'], 'required', 'when' => function ($model, $attribute){}],
-		// 
+		// 通过匿名函数进行校验         参数：(验证的属性, 规则中定义的params, InlineValidator对象)
         [['username', 'email', 'password'], function ($attribute, $params, $validator){}, 'params' => ['a', 'b']],
 		// 使用当前model中的 myValidator() 方法进行验证
 		[['username', 'email', 'password'], 'myValidator'],
-        // 除了 register 场景,其他场景 username 和 password 必须有值
-        [['username', 'password'], 'required', 'except' => 'register'],
+        // 除了 register 场景,其他场景 username 和 password 必须有值; skipOnError = false 时，如果之前的验证器出现验证错误，该验证器依旧进行验证;  message 配置自定义的错误信息
+        [['!username', 'password'], 'required', 'except' => 'register', 'skipOnError' => false, 'message' => 'Please choose a username.'],
     ];
 }
 ```  
+> 以 !开头的属性为 非安全属性(只验证，不赋值)  
+
+#### yii自定义的验证器了解一下   
+`yii\validators\Validator` 类中定义了一些常用的验证器，去了解一下   
+
+### 相关方法  
+#### 返回当前场景需要验证的字段  
+```php
 # 返回当前场景需要验证的字段，包括以 !开头的 非安全属性(只验证，不赋值)    
-activeAttributes
+activeAttributes()
+```
+#### 返回当前场景 所有/某字段 有效的验证器  
+```php
 # 如果 $attribute = null 返回当前场景有效的验证器
 # 如果 $attribute = 字段值 返回 该字段 在当前场景下所有的验证器  
 getActiveValidators($attribute = null)
+```
+#### 验证 validate   
+默认验证所有需要验证的字段，可以指定验证的字段  
+```php
+# 如果传 $attributeNames = ['字段1', '字段2'] 将会只验证这两个字段  
+validate($attributeNames = null, $clearErrors = true)
+```
+#### 关于验证器的属性配置   
+在验证属性的时候用到了验证器的两个属性 `skipOnError` 和 `skipOnEmpty` , 分别表示当如果之前的验证器已经有错误是否跳过和该字段值为空时是否跳过验证。跳过验证后将不会进行验证，也就不发获取到全部的验证错误信息  
 
-### 块赋值
+**如果需要获取所有的验证错误信息，需要在配置 `rules` 时将 `skipOnError` 配置上去，值为 `false`**  
+
+#### 几个和error相关的方法  
+```php
+# 给属性添加错误信息，一般自定义验证方法的时候会用到  
+addError($attribute, $error = '')
+# 上面的复数形式  
+addErrors(array $items)
+# 获取 所有/指定的属性 是否有验证错误  
+hasErrors($attribute = null)
+# 获取 所有/指定的属性 的验证错误信息  
+getErrors($attribute = null)
+# 清除 所有/指定的属性 的验证错误信息  
+clearErrors($attribute = null)
+# 获取该属性的第一个错误信息  
+getFirstError($attribute)
+# 获取所有属性的第一个错误信息
+getFirstErrors()
+```
+### 临时验证   
+有时，你需要对某些没有绑定任何模型类的值进行 临时验证。
+
+若你只需要进行一种类型的验证 (e.g. 验证邮箱地址)，你可以调用所需验证器的 `validate()`` 方法。像这样：
+```php
+$email = 'test@example.com';
+$validator = new yii\validators\EmailValidator();
+
+if ($validator->validate($email, $error)) {
+    echo '有效的 Email 地址。';
+} else {
+    echo $error;
+}
+```
+
+## 块赋值  
+### setAttributes() 块赋值  
 块赋值只用一行代码将用户所有输入填充到一个模型，非常方便， 它直接将输入数据对应填充到 `yii\base\Model::attributes()` 属性。 以下两段代码效果是相同的， 都是将终端用户输入的表单数据赋值到 ContactForm 模型的属性， 明显地前一段块赋值的代码比后一段代码简洁且不易出错。
 ```php
 $model = new \app\models\ContactForm;
 $model->attributes = \Yii::$app->request->post('ContactForm');
+
 $model = new \app\models\ContactForm;
 $data = \Yii::$app->request->post('ContactForm', []);
 $model->name = isset($data['name']) ? $data['name'] : null;
@@ -258,44 +319,72 @@ $model->email = isset($data['email']) ? $data['email'] : null;
 $model->subject = isset($data['subject']) ? $data['subject'] : null;
 $model->body = isset($data['body']) ? $data['body'] : null;
 ```
-> 块赋值调用的是 `setAttributes()` 方法，有两个参数，第二个参数默认为 `true` ,表示需要 `rolus()` 方法在声明了的字段(属性)且字段前面没有 `!` 才给赋值(只是赋值，并验证)，改为 `false` 表示只要对应的有这个属性(字段)，就给赋值  
+> 块赋值调用的是 `setAttributes($values, $safeOnly = true)` 方法，第二个参数默认为 `true` ,表示需要 `rolus()` 方法在声明了的字段(属性)且字段前面没有 `!` 才给赋值(赋值，并验证)，改为 `false` 表示只要对应的有这个属性(字段)，就给赋值  
 
-### 非安全属性
-如上所述，`yii\base\Model::scenarios()` 方法提供两个用处：定义哪些属性应被验证，定义哪些属性安全。 在某些情况下，你可能想验证一个属性但不想让他是安全的， 可在scenarios()方法中属性名加一个惊叹号 `!`。 例如像如下的 `secret` 属性。
+### load() 表单块赋值  
+通过表单上传的数据通常是通过 `load` 进行块赋值的(前端用到表单小部件的情况，因为表单小部件默认会在表单提交的name属性值带上 `$model->formName()` 来对应该模型)。当然也可以手动指定 `$formName` 值为自定义的值  
 ```php
-public function scenarios()
+public function load($data, $formName = null)
 {
-    return [
-        'login' => ['username', 'password', '!secret'],
-    ];
+    // form表名
+    $scope = $formName === null ? $this->formName() : $formName;
+    // 如果没有表单名
+    if ($scope === '' && !empty($data)) {
+        $this->setAttributes($data);
+
+        return true;
+    // 如果有表名，获取表单名下的数据
+    // 获取提交的类名下的数据
+    } elseif (isset($data[$scope])) {
+        $this->setAttributes($data[$scope]);
+
+        return true;
+    }
+    return false;
 }
 ```
-> 当模型在 `login` 场景下，三个属性都会被验证， 但只有 `username`和 `password` 属性会被块赋值， 要对 `secret`属性赋值，必须像如下例子明确对它赋值。
+> 哈哈，其实还是用的 `setAttributes()` 嘛，就是用表单小部件的时候用这个方便  
 
+
+## 数据导出 toArray()  
+其实这个应该放在 `restful` 和 `AR模型` 是分析的，这里先简单看一下用法[下面都是官网的](https://www.yiichina.com/doc/guide/2.0/structure-models)  
+
+
+**默认情况下，字段名对应属性名，但是你可以通过覆盖 `fields()` 和/或 `extraFields()` 方法来改变这种行为， 两个方法都返回一个字段定义列表，`fields()` 方法定义的字段是默认字段， 表示 `toArray()` 方法默认会返回这些字段。 `extraFields()` 方法定义额外可用字段， 通过`toArray()`方法指定`$expand`参数来返回这些额外可用字段。** 例如如下代码会返回`fields()`方法定义的所有字段和`extraFields()`方法定义的`prettyName` and `fullAddress`字段。
 ```php
-$model->secret = $secret;
-The same can be done in rules() method:
-
-public function rules()
+// toArray(array $fields = [], array $expand = [], $recursive = true) 方法参数
+$array = $model->toArray([], ['prettyName', 'fullAddress']);
+```
+可通过覆盖 `fields()` 来增加、删除、重命名和重定义字段， `fields()` 方法返回值应为数组， 数组的键为字段名，数组的值为对应的可为属性名或匿名函数返回的字段定义对应的值。 特使情况下，如果字段名和属性定义名相同，可以省略数组键， 例如：
+```php
+// 明确列出每个字段，特别用于你想确保数据表或模型
+// 属性改变不会导致你的字段改变(保证后端的API兼容)。
+public function fields()
 {
     return [
-        [['username', 'password', '!secret'], 'required', 'on' => 'login']
+        // 字段名和属性名相同
+        'id',
+
+        // 字段名为 "email"，对应属性名为 "email_address"
+        'email' => 'email_address',
+
+        // 字段名为 "name", 值通过PHP代码返回
+        'name' => function () {
+            return $this->first_name . ' ' . $this->last_name;
+        },
     ];
 }
+
+// 过滤掉一些字段，特别用于
+// 你想继承父类实现并不想用一些敏感字段
+public function fields()
+{
+    $fields = parent::fields();
+
+    // 去掉一些包含敏感信息的字段
+    unset($fields['auth_key'], $fields['password_hash'], $fields['password_reset_token']);
+
+    return $fields;
+}
 ```
-> 加了`!`的只能单独赋值才能赋值，没想到有什么情景会用到  
-
-### 数据导出
-模型通常要导出成不同格式，例如，你可能想将模型的一个集合转成JSON或Excel格式， 导出过程可分解为两个步骤，  
-第一步，模型转换成数组；  
-第二步，数组转换成所需要的格式。   
-你只需要关注第一步，因为第二步可被通用的 数据转换器如`yii\web\JsonResponseFormatter`来完成。
-
-将模型转换为数组最简单的方式是使用 `yii\base\Model::attributes()` 属性， 例如：
-```php
-$post = \app\models\Post::findOne(100);
-$array = $post->attributes;
-```
-
-## AR
-### rules规则  
+> 警告： 由于模型的所有属性会被包含在导出数组，最好检查数据确保没包含敏感数据， 如果有敏感数据，应覆盖 `fields()` 方法过滤掉， 在上述列子中，我们选择过滤掉 `auth_key`, `password_hash` and `password_reset_token`  

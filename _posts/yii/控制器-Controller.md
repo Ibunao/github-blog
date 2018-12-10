@@ -35,7 +35,7 @@ $enableCsrfValidation # 是否验证csrf, 如果关闭，在beforeAction 中将�
 3. /module/controllerid/actionid 执行绝对路由  
 
 其中第三种就是我们发送请求的时候所要执行的操作，而第二种其实和第三种是一样的(`$app`也是module)，只不过使用当前module往后找  
-
+<!-- more -->
 ```php
 /**
  * 运行路由指向的action

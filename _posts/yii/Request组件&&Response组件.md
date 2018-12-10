@@ -1,9 +1,19 @@
-
+---
+title: Request组件和Response组件
+date: 2017-07-03 11:56:02
+tags:
+	- yii
+	- Response
+	- Request
+categories:
+    - yii
+    - 请求和响应组件
+---
+# Request组件
+## 前言  
 Request 中的方法并不难，主要是一些功能的封装罢了，原理上没有很复杂的东西。只是涉及到许多HTTP的有关知识,具体的代码分析和相关知识可以看
 
-
-这里主要归纳一下使用方法  
-
+这里主要归纳一下使用方法，以常用的 `yii\web\Request` 为例   
 
 ## 请求头请求体  
 ### getHeaders() 获取请求头  
@@ -17,7 +27,7 @@ Request 中的方法并不难，主要是一些功能的封装罢了，原理上
 相比较于 `$HTTP_RAW_POST_DATA` ， `php://input` 无需额外地在 `php.ini` 中 激活 `always-populate-raw-post-data` ，而且对于内存的压力也比较小。
 当编码方式为 `multipart/form-data-encoded` 时， `php://input` 是无效的。这种情况一般为上传文档。 这种情况可以使用传统的 `$_FILES` 或者 `yii\web\UploadedFile`   
 
-
+<!-- more -->
 ## 获取/判断请求方法  
 ### getMethod() 获取请求的方法  
 可以以指定 `$_POST['_method']` 的方式来用POST请求来模拟其他方法的请求。  
@@ -172,5 +182,9 @@ print_r($accepts);
 ### getETags() 返回etags内容, 在http缓存有用  
 [使用ETags减少Web应用带宽和负载](http://www.infoq.com/cn/articles/etags)  
 
-## 参考  
+**参考**  
 [深入理解yii-Request(完全参考)](http://www.digpage.com/web_request.html#)  
+
+# Response组件  
+## 前言  
+我觉得官网上的已经很清晰够用了，代码也比较简单。直接看 [官网](https://www.yiichina.com/doc/guide/2.0/runtime-responses)  
