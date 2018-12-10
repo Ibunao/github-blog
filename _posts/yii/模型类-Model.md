@@ -9,7 +9,9 @@ categories:
     - model
 ---
 ## 前言  
-简单的接收数据的表单，使用继承自  `Model` 类的模型即可，如果是需要增删改之类的牵扯到表的则用 `Active Record 活动记录`(也是继承自 `Model`)  
+简单的接收数据的表单，使用继承自  `Model` 类的模型即可，如果是需要增删改之类的牵扯到表的则用 `Active Record 活动记录`(也是继承自 `Model`)    
+> 下面所述，字段和属性一个意思  
+
 ## 像数组一样访问和遍历模型  
 可像访问数组单元项一样访问属性，这要感谢 `yii\base\Model` 支持 `ArrayAccess` 数组访问[参考链接](https://www.bunao.win/2018/10/11/php/%E5%AF%B9%E8%B1%A1%E6%95%B0%E7%BB%84-ArrayAccess/) 和 `ArrayIterator` 数组迭代器[参考链接](https://www.bunao.win/2018/10/11/php/%E8%BF%AD%E4%BB%A3%E5%99%A8-Iterator/):
 ```php
@@ -72,7 +74,14 @@ class User extends ActiveRecord
 }
 ```
 #### 方式二：在规则 `rolus()` 方法中定义
-直接在规则 `rolus()` 方法中 使用 `on` 来指定场景，没使用 `on` 将用在所有场景中    
+直接在规则 `rolus()` 方法中 使用 `on` 来指定场景，没使用 `on` 将 **用在所有场景中**    
+> 这里的所有场景是指规则中所有通过 `on` 或 `except` 定义的场景  
+
+使用规则如下，请按照顺序  
+1. 如果 `on` 没有指定场景，这条规则上的字段将会添加到所有的场景  
+2. 如果 `on` 没有指定场景，而使用 `except` 指定场景，那么这条规则上的字段将作用于除了 `except` 指定场景外的所有场景  
+3. 如果 `on` 指定了场景，那这条规则上的字段就将会使用所指定的场景  
+
 ```php
 public function rules()
 {
@@ -86,7 +95,66 @@ public function rules()
 }
 ```
 #### 两种方式定义规则方式的区别   
+其实两种方式是一样的，第一种方式更加清楚一些，而第二种方法更加灵活一些。我们看一下第二种是怎么实现的。  
+其实就是将规则 `rules` 中定义的场景提取出来
+```php
+public function scenarios()
+{
+    // 默认场景
+    $scenarios = [self::SCENARIO_DEFAULT => []];
+    // 遍历rules定义的所有的验证器
+    foreach ($this->getValidators() as $validator) {
+        // rule数组中定义的场景 on=>scenario
+        foreach ($validator->on as $scenario) {
+            $scenarios[$scenario] = [];
+        }
+        // 验证规则中除去某个场景都验证的情况 except=>scenario
+        foreach ($validator->except as $scenario) {
+            $scenarios[$scenario] = [];
+        }
+    }
+    // 获取所有的场景
+    $names = array_keys($scenarios);
 
+    // 将字段添加到对应的场景中
+    foreach ($this->getValidators() as $validator) {
+        // 如果 某个 rule 中没有定义场景
+        // 表示这个rule中所有的字段用在所有的场景中
+        if (empty($validator->on) && empty($validator->except)) {
+            foreach ($names as $name) {
+                foreach ($validator->attributes as $attribute) {
+                    $scenarios[$name][$attribute] = true;
+                }
+            }
+        // 如果 rule 没有定义使用的场景 on
+        } elseif (empty($validator->on)) {
+            foreach ($names as $name) {
+                // 如果不在定义的排除 except 的场景
+                if (!in_array($name, $validator->except, true)) {
+                    foreach ($validator->attributes as $attribute) {
+                        $scenarios[$name][$attribute] = true;
+                    }
+                }
+            }
+        // 如果定义了使用的场景 on
+        } else {
+            foreach ($validator->on as $name) {
+                foreach ($validator->attributes as $attribute) {
+                    $scenarios[$name][$attribute] = true;
+                }
+            }
+        }
+    }
+    // 除去没用到的场景
+    foreach ($scenarios as $scenario => $attributes) {
+        if (!empty($attributes)) {
+            $scenarios[$scenario] = array_keys($attributes);
+        }
+    }
+
+    return $scenarios;
+}
+```  
 
 ### 使用场景  
 如下展示两种设置场景的方法:
@@ -98,8 +166,11 @@ $model->scenario = 'login';
 $model = new Model(['scenario' => 'login']);
 ```
 
-### 验证规则
-当模型接收到终端用户输入的数据，数据应当满足某种规则(称为 验证规则, 也称为 业务规则)。 例如假定 `ContactForm` 模型， 你可能想确保所有属性不为空且 `email` 属性包含一个有效的邮箱地址， 如果某个属性的值不满足对应的业务规则， 相应的错误信息应显示，以帮助用户修正错误。
+## 验证规则  
+为什么写在场景之后，因为用到场景啊  
+先看一下下面的内容，之后我们在分析原理，内容来自[官方文档](https://www.yiichina.com/doc/guide/2.0/structure-models)  
+
+当模型接收到终端用户输入的数据，数据应当满足某种规则(称为 验证规则, 也称为 业务规则)。
 
 可调用 `yii\base\Model::validate()` 来验证接收到的数据， 该方法使用 `yii\base\Model::rules()` 申明的验证规则来验证每个相关属性， 如果没有找到错误，会返回 `true`， 否则它会将错误保存在 `yii\base\Model::errors` 属性中并返回 `false` ，例如：
 ```php
@@ -145,7 +216,35 @@ public function rules()
 ```
 如果没有指定 `on` 属性，规则会在所有场景下应用， 在当前 `yii\base\Model::scenario` 下应用的规则称之为 `active rule`活动规则。
 
-> 一个属性只会属于`scenarios()`中定义的活动属性且在 `rules()` 申明对应一条或多条活动规则的情况下被验证。
+一个属性只会属于`scenarios()`中定义的活动属性且在 `rules()` 申明对应一条或多条活动规则的情况下被验证。
+### 原理  
+根据 `rules` 中定义的规则生成验证器，然后在根据场景来获取到需要验证的字段进行验证  
+### 使用  
+
+#### rules 配置  
+下面随便写几条规则理解一下  
+```php
+public function rules()
+{
+    return [
+        // 在"register" 场景下 username, email 和 password 必须有值
+        [['username', 'email', 'password'], 'required', 'on' => 'register'],
+		// 验证之前会先执行 when 定义的匿名函数，如果返回的true才往后进行验证。 参数：(当前模型对象, 验证的属性)
+        [['username', 'email', 'password'], 'required', 'when' => function ($model, $attribute){}],
+		// 
+        [['username', 'email', 'password'], function ($attribute, $params, $validator){}, 'params' => ['a', 'b']],
+		// 使用当前model中的 myValidator() 方法进行验证
+		[['username', 'email', 'password'], 'myValidator'],
+        // 除了 register 场景,其他场景 username 和 password 必须有值
+        [['username', 'password'], 'required', 'except' => 'register'],
+    ];
+}
+```  
+# 返回当前场景需要验证的字段，包括以 !开头的 非安全属性(只验证，不赋值)    
+activeAttributes
+# 如果 $attribute = null 返回当前场景有效的验证器
+# 如果 $attribute = 字段值 返回 该字段 在当前场景下所有的验证器  
+getActiveValidators($attribute = null)
 
 ### 块赋值
 块赋值只用一行代码将用户所有输入填充到一个模型，非常方便， 它直接将输入数据对应填充到 `yii\base\Model::attributes()` 属性。 以下两段代码效果是相同的， 都是将终端用户输入的表单数据赋值到 ContactForm 模型的属性， 明显地前一段块赋值的代码比后一段代码简洁且不易出错。
