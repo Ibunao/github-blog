@@ -80,7 +80,7 @@ public function beforeAction($action)
 ```  
 
 ## 视图相关  
-### 设置 layout   
+### 设置 layout 布局文件    
 根据 `findLayoutFile()` 方法可以知道根据 `layout` 属性值的不同获取 layout 的方法也不相同  
 1. `$this->layout = false` 不使用layout  
 2. `$this->layout = @abc/ad.php` 以别名的形式开头指定layout路径，直接用的就是这个文件  
