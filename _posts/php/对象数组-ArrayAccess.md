@@ -25,7 +25,7 @@ ArrayAccess {
     abstract public void offsetUnset ( mixed $offset )
 }
 ```
-
+<!--more-->
 ## 实现接口(例子)
 ```php
 <?php

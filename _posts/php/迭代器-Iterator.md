@@ -26,6 +26,7 @@ Iterator extends Traversable {
     abstract public scalar key ( void )  
 }  
 ```  
+<!--more-->
 ## 实现一个简单的迭代器    
 
 ```php
