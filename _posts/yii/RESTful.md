@@ -92,7 +92,7 @@ class UserController extends ActiveController
     ]
 ]
 ```
-> info： 上述配置是可选的。若未按上述配置，API 将仅可以分辨 `application/x-www-form-urlencoded` 和 `multipart/form-data` 输入格式。
+> info： 上述配置是可选的。若未按上述配置，API 将仅可以分辨 `application/x-www-form-urlencoded` 和 `multipart/form-data` 输入格式。也就是通过 `$_POST` 进行获取参数。
 
 我们可以看一下 `Request` 类的 `getBodyParams` 方法，方法中会根据请求的 `Content-Type` 来用不同的解析器解析请求参数，这里配置的 `'application/json' => 'yii\web\JsonParser'` 就是为了能够在请求头参数为 `Content-Type:application/json` 时请求体的json数据能够很好的被解析  
 
