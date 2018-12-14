@@ -101,7 +101,7 @@ class UserController extends ActiveController
 ```php
 'urlManager' => [
     'enablePrettyUrl' => true,
-    // 最好开启，如果不走rest的路由规则不满足就不用使用默认的了
+    // restful模式最好开启，如果路由规则不满足也不会使用默认的解析规则，直接返回异常
     // 'enableStrictParsing' => true,
     'showScriptName' => false,
     // 配置url解析规则类
@@ -136,11 +136,25 @@ class UserController extends ActiveController
             'extraPatterns' => [
                 'POST search' => 'search',
             ],
+            // 指定模块，可以理解成版本
+            // 'prefix' => 'v1',
         ],
     ],
 ]
 ```
-其他的配置等详解Yii路由的文章的时候看一下就可以了   
+看一下 `yii\rest\UrlRUle` 路由为我们做了什么  
+```php
+public $patterns = [
+    'PUT,PATCH {id}' => 'update',
+    'DELETE {id}' => 'delete',
+    'GET,HEAD {id}' => 'view',
+    'POST' => 'create',
+    'GET,HEAD' => 'index',
+    '{id}' => 'options',
+    '' => 'options',
+];
+```
+这部分是yii为我们配置的默认的路由，什么方式的请求指定到对应的 `action`  
 
 ### 资源设置  
 可以根据url上设置参数来获取指定的字段值, 看一下官方案例  
@@ -270,7 +284,8 @@ public function fields()
 ]
 ```
 
-> AR这种联表方式还是有点复杂的，不推荐。可以直接查返回数据  
+> AR这种联表方式还是有点复杂的，不推荐。可以参考下面的自定义部分  
+
 
 ### 控制器设置  
 控制器需要改变的比较少，无非就是添加一些路由配置的额外的要实现的 `action`，覆盖一些 `behavior` ，重写一下检查权限的方法 `checkAccess()`  
@@ -334,6 +349,7 @@ class ProductController extends ActiveController
 	}
 }
 ```
+### 控制器的过滤器解析  
 下面我们主要看一下 `behaviors` 部分  
 ```php
 yii\rest\Controller 已经给我们配置好了四个
@@ -366,18 +382,42 @@ public function behaviors()
     ];
 }
 ```
-#### 格式化响应  
-这部分已经是写好的了，我们只需要在请求头中加入指定响应格式的参数即可  
-```php
+#### 格式化响应  `contentNegotiator`
+这个配置相对简单，我们只需要在请求头中加入指定响应格式的参数即可获取对应格式的数据    
+```php  
+// 根据请求设置响应格式和语言
+'contentNegotiator' => [
+    'class' => ContentNegotiator::className(),
+    'formats' => [
+        // 这个顺序很重要，如果请求没有设置 Accept:application/json||xml 谁第一个用谁
+        'application/json' => Response::FORMAT_JSON,
+        'application/xml' => Response::FORMAT_XML,
+    ],
+],
+
+# 请求头
 # 接收json格式的数据
 Accept: application/json;
 # 接收xml格式的数据
-Accept: application/json;
+Accept: application/xml;
 ```
-#### 验证  
+#### 用户验证  
 yii提供了多种验证方法，这里以 `HttpBearerAuth` 验证(head头获取token)为例  
+
 ```php
-实现验证token的方法(通过token获取到对应的用户)
+# 1. 控制器重写behaviors中的用户验证过滤器
+public function behaviors()
+{
+    $behaviors = parent::behaviors();
+    // 重写验证过滤器的配置
+    $behaviors['authenticator'] = [
+        'class' => HttpBearerAuth::className(),
+        // 可以不验证的action，比方说登录的接口就不需要验证  
+        'optional' => ['index']
+    ];
+    return $behaviors;
+}
+# 2. 实现验证token的方法(通过token获取到对应的用户)
 common\models\User
 
 /**
@@ -390,7 +430,7 @@ public static function findIdentityByAccessToken($token, $type = null)
     return static::findOne(['auth_key' => $token, 'status' => self::STATUS_ACTIVE]);
 }
 ```
-此时，我们就可以通过获取到的 `token` 进行请求了  
+此时，我们就可以通过获取到(通常是通过登录获取到的)的 `token` 进行请求了  
 ```php
 GET rest.yiilearn.com/products  
 请求头  
@@ -399,7 +439,7 @@ GET rest.yiilearn.com/products
 > 固定格式 `"Authorization":"Bearer " + $token `
 
 #### 速率验证  
-在实现了用户验证后速率验证才会有用，我们需要 `User` 实现几个方法，如下  
+在 **实现了用户验证后速率验证才会有用** ，我们需要 `User` 实现几个方法，如下  
 首先我们需要在 `user` 表添加两个字段用来存储剩余次数和访问时间 `allowance`, `allowance_updated_at`  
 ```php
 common\models\User
@@ -444,5 +484,108 @@ public function saveAllowance($request, $action, $allowance, $timestamp)
 }
 ```
 实现起来就是这么简单  
+
+### 自定义action  
+yii配置成 restful 风格的接口确实很快。但我们有时想要额外的添加或重写一些 action ，或者觉得 AR 联表太过麻烦，这是我们就要了解一下逻辑原理然后对其进行扩展  
+
+这里有个很重要的点，就是在执行完 action 后，会对action输出的结果记性格式化    
+```php
+/**
+ * 处理响应的数据
+ * {@inheritdoc}
+ */
+public function afterAction($action, $result)
+{
+    $result = parent::afterAction($action, $result);
+    return $this->serializeData($result);
+}
+
+# yii\rest\Serializer 的格式化方法
+/**
+ * 格式化响应数据的方法
+ * @param  {[type]} $data 响应的数据
+ * @return {[type]}       [description]
+ */
+public function serialize($data)
+{
+    // 如果继承模型并且有错误，返回错误信息
+    if ($data instanceof Model && $data->hasErrors()) {
+        return $this->serializeModelErrors($data);
+    // 如果继承自 Arrayable
+    } elseif ($data instanceof Arrayable) {
+        return $this->serializeModel($data);
+    // 使用的数据提供器 DataProvider
+    } elseif ($data instanceof DataProviderInterface) {
+        return $this->serializeDataProvider($data);
+    }
+    // 直接返回数据
+    return $data;
+}
+```
+也就是说以上两种类型 `Arrayable` 和 `DataProviderInterface` 就将会进行格式化，具体的格式化代码自己看( 其中 `Model` 的 `toArray()` 方法实现了请求时的资源字段)。所以如果我们想要模仿，也可以输出这两种格式的数据，当然也可以自己处理格式直接输出数据。  
+#### 扩展 action 的方式  
+1. 为该控制器的路由配置 `extraPatterns` 属性     
+```
+'rules' => [
+    [
+        'class' => 'yii\rest\UrlRule',
+        'controller' => 'product',
+        ...
+        // 配置额外自定义的访问
+        // 访问格式如 POST /products/search 可以支持新行为 search
+        'extraPatterns' => [
+            'POST search' => 'search',
+        ],
+    ],
+],
+```
+2. 该控制器添加对应的action  
+```php
+/**
+ * 添加额外配置的action
+ * @return [type] [description]
+ */
+public function actionSearch()
+{
+	# 直接返回数据
+	// return Yii::$app->request->post();
+
+	# 通过 Query 查询 返回 ActiveDataProvider 的方式
+	$query = (new Query)->from('meet_product mp')
+		->leftJoin('meet_color mc', 'mc.color_id = mp.color_id');
+	return Yii::createObject([
+        'class' => ActiveDataProvider::className(),
+        'query' => $query,
+        'pagination' => [
+        	// 默认每页显示多少个数据
+        	'defaultPageSize' => 30,
+            'params' => [
+            	// 第几页的参数
+            	'page' => 1
+        	],
+        ],
+    ]);
+}
+```
+3. 通过 `POST /controllerIds/search` 即可访问  
+
+
+#### 删除指定 action
+删除指定 action ，重写 `actions()` 删除掉指定的 action   
+```php
+public function actions()
+{
+    $actions = parent::actions();
+
+    // 禁用 "delete" 和 "create" 动作
+    unset($actions['delete'], $actions['create']);
+
+    return $actions;
+}
+```
+#### 覆盖 action 的方式  
+覆盖的方式不用改路由，但是由于创建action的时候优先 `actions()` 方法中定义的，所以我们需要先将指定的 action删除掉，参考上面，然后在 `Controller` 中定义要重写的 `action`  
+
+
 ### 版本化 && 错误处理  
 比较简单，直接看官方文档 [版本化](https://www.yiichina.com/doc/guide/2.0/rest-versioning) [错误处理](https://www.yiichina.com/doc/guide/2.0/rest-error-handling)
