@@ -18,6 +18,16 @@ yii 为我们提供的两种存储方式一种是文件方式一种是数据库�
 ## 准备  
 首先安装 `yii-admin` 扩展，[github地址](https://github.com/mdmsoft/yii2-admin)   
 ### 创建表  
+执行创建相关表的 `migrate` 之前需要先配置一下权限管理方式，我们这里选择数据库存储方式  
+```php
+// 配置权限管理方式
+'components' => [
+	...
+	'authManager' => [
+		'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\PhpManager'
+	]
+],
+```
 两条命令，首先创建yii自带的rbac相关表  
 ```php
 yii migrate --migrationPath=@yii/rbac/migrations
@@ -36,6 +46,7 @@ yii migrate --migrationPath=@mdm/admin/migrations
 将会得到一个menu表
 
 ### 配置  
+相关配置  
 ```php
 // 配置成中文，配置这个后将会根据国际化功能把英文映射成对应的中文  
 'language' => 'zh-CN',  
@@ -48,7 +59,7 @@ yii migrate --migrationPath=@mdm/admin/migrations
 	]
 	...
 ],
-// 配置权限
+// 配置权限管理方式
 'components' => [
 	...
 	'authManager' => [

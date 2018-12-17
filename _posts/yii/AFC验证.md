@@ -77,7 +77,7 @@ class SiteController extends Controller
 role => ['@', '?', 'otherRole']
 
 ? : 表示允许未登录的访问  
-@ : 表示未登录才能访问
+@ : 表示登录才能访问
 otherRole : 其他的都是对应的权限/角色 详见RBAC   
 
 roleParams => function($rule){} || String || Array # （算出来的）值将会作为权限的参数  
