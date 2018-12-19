@@ -51,7 +51,7 @@ return [
 
         'urlManager' => [
             'enablePrettyUrl' => true,
-            // 最好开启，如果如开启，在不满足配置的路由规则后或使用默认的路由规则进行解析  
+            // 如果如开启，在不满足配置的路由规则后或使用默认的路由规则进行解析  
             // 'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
