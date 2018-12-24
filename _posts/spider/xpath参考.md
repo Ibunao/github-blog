@@ -12,7 +12,7 @@ categories:
 ---
 
 ## 语法  
-百度吧  
+[w3c文档](http://www.w3school.com.cn/xpath/index.asp)  
 看过之后可以通过后面的 应用 部分理解一下  
 ## 获得 xpath 路径   
 通过chrome浏览器可以右键来查看   
@@ -50,8 +50,26 @@ response = HtmlResponse(url='', body=html, encoding='utf-8')
 selector = Selector(response=response)
 # 获取所有a标签
 temp = selector.xpath('//a')
-# 获取第一个body标签并从body标签开始找ul标签 ./ul 相对标签的子标签
-temp = selector.xpath('body')[0].xpath('.//ul')
+# 获取不到，因为a标签不是html的子标签
+temp = selector.xpath('a')
+
+# 相对位置绝对位置
+# 获取第一个body标签并从body标签开始找ul标签
+x = selector.xpath('body')[0]
+# .//ul 相对标签的所有子代ul
+temp = x.xpath('.//ul')
+# print(temp)
+# ./ul 相对标签的子标签ul
+temp = x.xpath('./ul')
+# print(temp)
+# 同上 相对于标签的子标签ul
+temp = x.xpath('ul')
+# print(temp)
+# 相对
+temp = selector.xpath('body/div')[0].xpath('.//li')
+# print(temp)
+# 绝对 还是搜所有的，不依赖父标签
+temp = selector.xpath('body/div')[0].xpath('//li')
 print(temp)
 exit()
 # 获取body的子标签ul
