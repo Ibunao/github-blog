@@ -12,7 +12,7 @@ Yii 的 restful 实现了用户访问速率的控制(`RateLimiter`)，但是是�
 
 ## 配置和扩展  
 把过滤器注册进控制器中
-```python
+```php
 public function behaviors()
 {
     return [
@@ -25,7 +25,7 @@ public function behaviors()
 }
 ```
 扩展的话需要先看一下下面给出的代码。需要更改的有三个方法  
-```python
+```php
 getRateLimit($request, $action)
 loadAllowance($request, $action)
 saveAllowance($request, $action, $allowance, $timestamp)
@@ -51,7 +51,7 @@ use yii\web\TooManyRequestsHttpException;
  *
  * You may use IpRateLimiter by attaching it as a behavior to a controller or module, like the following,
  *
- * ```php
+ *
  * public function behaviors()
  * {
  *     return [
@@ -61,7 +61,7 @@ use yii\web\TooManyRequestsHttpException;
  *         ],
  *     ];
  * }
- * ```
+ * 
  *
  * When the user has exceeded his rate limit, RateLimiter will throw a [[TooManyRequestsHttpException]] exception.
  *
