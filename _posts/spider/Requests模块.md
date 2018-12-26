@@ -211,6 +211,23 @@ response = ssion.get("http://www.renren.com/410043129/profile")
 print (response.text)
 ```
 ### 其他  
+#### 是否允许重定向  
+将 `allow_redirects` 设置为 `True` 表示允许重定向，可以通过 `history` 来查看之前重定向跳转信息  
+```python
+import requests
+r = requests.get('http://github.com')
+print(r.url)
+print(r.status_code)
+print(r.history)
+```
+#### 设置超时时间   
+超时时间通过 `timeout` 参数进行设置  
+```python
+requests.get('http://github.com', timeout = 3)
+```
+
+
+
 #### https跳过证书验证  
 如果我们想跳过 12306 的证书验证，把 verify 设置为 `False` 就可以正常请求了。
 ```python
