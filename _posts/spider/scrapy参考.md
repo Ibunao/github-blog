@@ -587,7 +587,9 @@ COOKIES_ENABLED = True
 ```
 
 ## 其他    
-### debug 模式启动 || 多爬虫启动   
+### debug 模式启动(调试) || 多爬虫启动   
+**调试需要通过IDE的debug模式启动**  
+由于通过终端直接执行爬虫命令无法调试，我们需要将执行爬虫的命令写在一个文件中然后执行  
 创建文件 `cankao3.py`, 内容如下    
 ```python
 from cankao.spiders.cankao1 import Cankao1Spider
@@ -595,7 +597,7 @@ from scrapy.utils.project import get_project_settings
 from scrapy.crawler import CrawlerProcess
 
 '''
-启动爬虫, 可以通过debug模式启动，进行源码分析
+启动爬虫, 可以通过debug模式启动(debug模式启动)，进行源码分析
 '''
 
 def my_run1():
@@ -619,6 +621,31 @@ def my_run2():
 
 if __name__ == '__main__':
     my_run1()
+```
+调试方法2    
+
+在项目根目录下新建 main.py 文件,用于调试
+```python
+from scrapy import cmdline
+cmdline.execute('scrapy crawl sunwz'.split())
+
+执行程序
+python3 main.py
+```
+### 配置  
+#### 日志文件名和处理等级  
+```python
+LOG_FILE = "dg.log"
+LOG_LEVEL = "DEBUG"
+```
+下面给出如何使用 WARNING 级别来记录信息的例子:
+```python
+from scrapy import log
+log.msg("This is a warning", level=log.WARNING)
+```
+#### 延时下载  
+```python
+DOWNLOAD_DELAY = 0.25    # 250 ms of delay
 ```
 
 ### 分析xpath是否正确   
