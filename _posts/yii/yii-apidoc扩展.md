@@ -93,7 +93,7 @@ balabala
 vendor/bin/apidoc guide sourcedocs mddoc
 ```
 
-![图1](/images/yii/apidoc/apidoc1.png)
+![图2](/images/yii/apidoc/apidoc2.png)
 
 4. 生成pdf的自己测试，官方文档上有   
 
