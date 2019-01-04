@@ -26,6 +26,7 @@ composer require ibunao/yii2-apidoc
     ...
 ],
 ```
+<!-- more -->
 #### 配置需要接口文档的控制器    
 
 ```php
