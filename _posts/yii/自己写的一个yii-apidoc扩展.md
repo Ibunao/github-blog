@@ -26,6 +26,8 @@ composer require ibunao/yii2-apidoc
     ...
 ],
 ```
+> 注意：如果访问的是其他域名，会存在跨域问题，需要在指向项目中添加header头,如 `header("Access-Control-Allow-Origin: *");` 允许所有  
+
 <!-- more -->
 #### 配置需要接口文档的控制器    
 
