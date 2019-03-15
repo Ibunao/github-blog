@@ -387,7 +387,7 @@ FILES_STORE = './download/files'
 FILES_EXPIRES = 30
 ```
 
-```
+```python
 import scrapy
 from scrapy.pipelines.images import ImagesPipeline
 
@@ -648,7 +648,7 @@ log.msg("This is a warning", level=log.WARNING)
 DOWNLOAD_DELAY = 0.25    # 250 ms of delay
 ```
 
-### 分析xpath是否正确   
+### 终端分析xpath是否正确   
 > win系统无法使用,mac正常     
 
 ```python
