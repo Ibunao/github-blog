@@ -238,7 +238,7 @@ frame
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -302,7 +302,7 @@ frame
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -313,7 +313,7 @@ frame.head()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -371,7 +371,7 @@ frame.head()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 如果指定了列序列，则DataFrame的列就会按照指定顺序进行排列
@@ -384,7 +384,7 @@ pd.DataFrame(data, columns=['year', 'state', 'pop'])
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -448,7 +448,7 @@ pd.DataFrame(data, columns=['year', 'state', 'pop'])
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -460,7 +460,7 @@ frame2
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -531,7 +531,7 @@ frame2
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -610,7 +610,7 @@ frame2
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -681,7 +681,7 @@ frame2
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 将列表或数组赋值给某个列时，其长度必须跟DataFrame的长度相匹配。如果赋值的是一个Series，就会精确匹配DataFrame的索引，所有的空位都将被填上缺失值：
@@ -695,7 +695,7 @@ frame2
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -766,7 +766,7 @@ frame2
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 为不存在的列赋值会创建出一个新列。关键字del用于删除列。
@@ -780,7 +780,7 @@ frame2
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -858,7 +858,7 @@ frame2
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -870,7 +870,7 @@ frame2
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -941,7 +941,7 @@ frame2
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 另一种常见的数据形式是嵌套字典：  
@@ -956,7 +956,7 @@ frame3
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -998,7 +998,7 @@ frame3
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 如果设置了 DataFrame 的 index 和 columns 的 name 属性，则这些信息也会被显示出来：
@@ -1011,7 +1011,7 @@ frame3
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1058,12 +1058,12 @@ frame3
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
 ```python
-# 获取值 
+# 获取值
 frame3.values
 ```
 
@@ -1101,7 +1101,7 @@ frame3
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1148,7 +1148,7 @@ frame3
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -1190,7 +1190,7 @@ dup_labels
 
 
 
-Index 索引对象有一些方法和属性，不怎么用 
+Index 索引对象有一些方法和属性，不怎么用
 
 
 ```python
@@ -1295,7 +1295,7 @@ frame
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1341,7 +1341,7 @@ frame
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -1352,7 +1352,7 @@ frame.reindex(['a', 'b', 'c', 'd'])
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1404,7 +1404,7 @@ frame.reindex(['a', 'b', 'c', 'd'])
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -1415,7 +1415,7 @@ frame.reindex(columns = ['Texas', 'Utah', 'California'])
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1461,7 +1461,7 @@ frame.reindex(columns = ['Texas', 'Utah', 'California'])
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 reindex函数的各参数及说明  
@@ -1515,7 +1515,7 @@ data
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1572,7 +1572,7 @@ data
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -1582,7 +1582,7 @@ data.drop(['Ohio', 'Utah'])
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1625,7 +1625,7 @@ data.drop(['Ohio', 'Utah'])
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -1635,7 +1635,7 @@ data.drop('two', axis=1)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1687,7 +1687,7 @@ data.drop('two', axis=1)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 许多函数，如drop，会修改Series或DataFrame的大小或形状，可以就地修改对象，不会返回新的对象：
@@ -1842,7 +1842,7 @@ data
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1899,7 +1899,7 @@ data
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -1925,7 +1925,7 @@ data[['three', 'one']]
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1972,7 +1972,7 @@ data[['three', 'one']]
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -1983,7 +1983,7 @@ data["Ohio":"Utah"]
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2033,7 +2033,7 @@ data["Ohio":"Utah"]
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -2043,7 +2043,7 @@ data[:2]
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2086,7 +2086,7 @@ data[:2]
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 ### 用 loc 和 iloc 进行选取
@@ -2100,7 +2100,7 @@ data
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2157,7 +2157,7 @@ data
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -2182,7 +2182,7 @@ data.loc['Ohio':'Utah', ['one', 'two']]
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2224,7 +2224,7 @@ data.loc['Ohio':'Utah', ['one', 'two']]
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -2249,7 +2249,7 @@ data.iloc[2:4, [0, 1]]
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2286,7 +2286,7 @@ data.iloc[2:4, [0, 1]]
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 pandas可以勉强进行整数索引，但是会导致小bug。我们有包含0,1,2的索引，但这会引起歧义，为了进行统一，如果轴索引含有整数，数据选取总会使用标签。为了更准确，请使用loc（标签）或iloc（整数）：
@@ -2396,7 +2396,7 @@ df1
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2442,7 +2442,7 @@ df1
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -2452,7 +2452,7 @@ df2
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2504,7 +2504,7 @@ df2
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -2514,7 +2514,7 @@ df1 + df2
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2578,7 +2578,7 @@ df1 + df2
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 在对不同索引的对象进行算术运算时，你可能希望当一个对象中某个轴标签在另一个对象中找不到时填充一个特殊值（比如0）
@@ -2590,7 +2590,7 @@ df1.add(df2, fill_value=0)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2654,7 +2654,7 @@ df1.add(df2, fill_value=0)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 其他算数方法：  
@@ -2705,7 +2705,7 @@ frame
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2757,7 +2757,7 @@ frame
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -2784,7 +2784,7 @@ frame + series
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2836,7 +2836,7 @@ frame + series
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -2847,7 +2847,7 @@ frame.add(series, axis = 'index')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2917,7 +2917,7 @@ frame.add(series, axis = 'index')
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -2945,7 +2945,7 @@ frame.add(series2, axis = 'index')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2997,7 +2997,7 @@ frame.add(series2, axis = 'index')
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 ### 函数应用和映射
@@ -3012,7 +3012,7 @@ frame
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -3064,7 +3064,7 @@ frame
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -3113,7 +3113,7 @@ frame.apply(f1)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -3153,7 +3153,7 @@ frame.apply(f1)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 元素级的Python函数也是可以用的。假如你想得到frame中各个浮点值的格式化字符串，使用applymap即可：
@@ -3166,7 +3166,7 @@ frame.applymap(format)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -3218,7 +3218,7 @@ frame.applymap(format)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 Series 有一个用于应用元素级函数的 map 方法
@@ -3286,7 +3286,7 @@ frame
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -3329,7 +3329,7 @@ frame
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -3340,7 +3340,7 @@ frame.sort_index()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -3383,7 +3383,7 @@ frame.sort_index()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -3394,7 +3394,7 @@ frame.sort_index(axis = 1)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -3437,7 +3437,7 @@ frame.sort_index(axis = 1)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 数据默认是按升序排序的，但也可以降序排序：
@@ -3449,7 +3449,7 @@ frame.sort_index(axis=1, ascending=False)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -3492,7 +3492,7 @@ frame.sort_index(axis=1, ascending=False)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 #### 按照值排序 sort_values
@@ -3540,7 +3540,7 @@ frame
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -3587,7 +3587,7 @@ frame
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -3597,7 +3597,7 @@ frame.sort_values(by='b')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -3644,7 +3644,7 @@ frame.sort_values(by='b')
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -3654,7 +3654,7 @@ frame.sort_values(by=['a', 'b'])
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -3701,7 +3701,7 @@ frame.sort_values(by=['a', 'b'])
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 默认情况下，rank是通过“为各组分配一个平均排名”的方式破坏平级关系的：
@@ -3797,7 +3797,7 @@ frame
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -3849,7 +3849,7 @@ frame
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -3859,7 +3859,7 @@ frame.rank(axis='columns')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -3911,7 +3911,7 @@ frame.rank(axis='columns')
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 排名时用于破坏平级关系的方法  
@@ -3977,7 +3977,7 @@ df
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -4024,7 +4024,7 @@ df
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -4108,7 +4108,7 @@ returns.tail()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -4179,7 +4179,7 @@ returns.tail()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 Series 的 corr 方法用于计算两个 Series 中重叠的、非NA的、按索引对齐的值的相关系数。与此类似， cov 用于计算协方差：
@@ -4217,7 +4217,7 @@ returns.corr()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -4274,7 +4274,7 @@ returns.corr()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -4284,7 +4284,7 @@ returns.cov()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -4341,7 +4341,7 @@ returns.cov()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 利用DataFrame的corrwith方法，你可以计算其列或行跟另一个Series或DataFrame之间的相关系数。传入一个Series将会返回一个相关系数值Series（针对各列进行计算）：
@@ -4371,7 +4371,7 @@ volume.head()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -4442,7 +4442,7 @@ volume.head()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -4625,7 +4625,7 @@ df
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -4679,7 +4679,7 @@ df
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 我们还可以使用read_table，并指定分隔符：
@@ -4691,7 +4691,7 @@ pd.read_table('data/examples/ex1.csv', sep = ',')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -4745,7 +4745,7 @@ pd.read_table('data/examples/ex1.csv', sep = ',')
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 并不是所有文件都有标题行。看看下面这个文件：
@@ -4768,7 +4768,7 @@ pd.read_csv('data/examples/ex2.csv', header=None)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -4822,7 +4822,7 @@ pd.read_csv('data/examples/ex2.csv', header=None)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -4832,7 +4832,7 @@ pd.read_csv('data/examples/ex2.csv', names=['a', 'b', 'c', 'd', 'message'])
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -4886,7 +4886,7 @@ pd.read_csv('data/examples/ex2.csv', names=['a', 'b', 'c', 'd', 'message'])
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 指定某一列作为列索引
@@ -4898,7 +4898,7 @@ pd.read_csv('data/examples/ex2.csv', names=['a', 'b', 'c', 'd', 'message'], inde
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -4955,7 +4955,7 @@ pd.read_csv('data/examples/ex2.csv', names=['a', 'b', 'c', 'd', 'message'], inde
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 如果希望将多个列做成一个层次化索引，只需传入由列编号或列名组成的列表即可：
@@ -4983,7 +4983,7 @@ pd.read_csv('data/examples/csv_mindex.csv', index_col=['key1', 'key2'])
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -5059,7 +5059,7 @@ pd.read_csv('data/examples/csv_mindex.csv', index_col=['key1', 'key2'])
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 有些表格可能不是用固定的分隔符去分隔字段的（比如空白符或其它模式）。看看下面这个文本文件：
@@ -5089,7 +5089,7 @@ pd.read_table('data/examples/ex3.txt', sep='\s+')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -5141,7 +5141,7 @@ pd.read_table('data/examples/ex3.txt', sep='\s+')
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 可以用skiprows跳过文件的第一行、第三行和第四行：
@@ -5166,7 +5166,7 @@ pd.read_csv('data/examples/ex4.csv', skiprows=[0, 2, 3])
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -5220,7 +5220,7 @@ pd.read_csv('data/examples/ex4.csv', skiprows=[0, 2, 3])
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 缺失值处理是文件解析任务中的一个重要组成部分。缺失数据经常是要么没有（空字符串），要么用某个标记值表示。默认情况下，pandas会用一组经常出现的标记值进行识别，比如NA及NULL：
@@ -5242,7 +5242,7 @@ pd.read_csv('data/examples/ex5.csv')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -5300,7 +5300,7 @@ pd.read_csv('data/examples/ex5.csv')
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 na_values 可以用一个列表或集合的字符串表示缺失值：(把指定的值填充成 Nan)
@@ -5313,7 +5313,7 @@ pd.read_csv('data/examples/ex5.csv', na_values=['NULL'])
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -5371,7 +5371,7 @@ pd.read_csv('data/examples/ex5.csv', na_values=['NULL'])
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 字典的各列可以对不同的值用NA进行标记：
@@ -5384,7 +5384,7 @@ pd.read_csv('data/examples/ex5.csv', na_values=sentinels)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -5442,7 +5442,7 @@ pd.read_csv('data/examples/ex5.csv', na_values=sentinels)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 pandas.read_csv和pandas.read_table常用的选项。  
@@ -5469,7 +5469,7 @@ pd.read_csv('data/examples/ex6.csv')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -5588,7 +5588,7 @@ pd.read_csv('data/examples/ex6.csv')
 </table>
 <p>10000 rows × 5 columns</p>
 </div>
-
+{% endraw %}
 
 
 如果只想读取几行（避免读取整个文件），通过nrows进行指定即可：
@@ -5600,7 +5600,7 @@ pd.read_csv('data/examples/ex6.csv', nrows=5)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -5670,7 +5670,7 @@ pd.read_csv('data/examples/ex6.csv', nrows=5)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 要逐块读取文件，可以指定chunksize（行数）：
@@ -5699,7 +5699,7 @@ print(piece)
                one       two     three      four key
     9998 -0.362559  0.598894 -1.843201  0.887292   G
     9999 -0.096376 -1.012999 -0.657431 -0.573315   0
-    
+
 
 ### 将数据写出到文本格式
 
@@ -5711,7 +5711,7 @@ data
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -5769,7 +5769,7 @@ data
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -5798,7 +5798,7 @@ import sys
 
 
 ```python
-# 设置分割符 | 
+# 设置分割符 |
 data.to_csv(sys.stdout, sep='|')
 ```
 
@@ -5806,7 +5806,7 @@ data.to_csv(sys.stdout, sep='|')
     0|one|1|2|3.0|4|
     1|two|5|6||8|world
     2|three|9|10|11.0|12|foo
-    
+
 
 禁止输出行和列的标签(索引)
 
@@ -5818,7 +5818,7 @@ data.to_csv(sys.stdout, index=False, header=False)
     one,1,2,3.0,4,
     two,5,6,,8,world
     three,9,10,11.0,12,foo
-    
+
 
 输出部分列
 
@@ -5831,7 +5831,7 @@ data.to_csv(sys.stdout, index=False, columns=['a', 'b', 'c'])
     1,2,3.0
     5,6,
     9,10,11.0
-    
+
 
 ### JSON数据
 
@@ -5870,7 +5870,7 @@ siblings
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -5907,7 +5907,7 @@ siblings
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 pandas.read_json可以自动将特别格式的JSON数据集转换为Series或DataFrame。例如：
@@ -5930,7 +5930,7 @@ data
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -5976,7 +5976,7 @@ data
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 将数据从pandas输出到JSON，可以使用to_json方法：
@@ -6017,7 +6017,7 @@ frame
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -6071,7 +6071,7 @@ frame
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -6088,7 +6088,7 @@ pd.read_pickle('data/examples/frame_pickle')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -6142,7 +6142,7 @@ pd.read_pickle('data/examples/frame_pickle')
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 > 注意：pickle仅建议用于短期存储格式。其原因是很难保证该格式永远是稳定的；今天pickle的对象可能无法被后续版本的库unpickle出来。虽然我尽力保证这种事情不会发生在pandas中，但是今后的某个时候说不定还是得“打破”该pickle格式。
@@ -6162,7 +6162,7 @@ frame.head()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -6208,7 +6208,7 @@ frame.head()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -6258,7 +6258,7 @@ store1['obj1'].head()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -6304,7 +6304,7 @@ store1['obj1'].head()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 ### 读取Microsoft Excel文件
@@ -6320,7 +6320,7 @@ pd.read_excel(xlsx, 'Sheet1')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -6378,7 +6378,7 @@ pd.read_excel(xlsx, 'Sheet1')
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 如果要读取一个文件中的多个表单，创建ExcelFile会更快，但你也可以将文件名传递到pandas.read_excel：
@@ -6391,7 +6391,7 @@ frame
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -6449,7 +6449,7 @@ frame
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 如果要将pandas数据写入为Excel格式，你必须首先创建一个ExcelWriter，然后使用pandas对象的to_excel方法将数据写入到其中：
@@ -6534,7 +6534,7 @@ pd.DataFrame(rows, columns=[x[0] for x in cursor.description])
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -6584,7 +6584,7 @@ pd.DataFrame(rows, columns=[x[0] for x in cursor.description])
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 pandas 有一个 read_sql 函数，可以直接通过 sql 进行读取数据
@@ -6601,7 +6601,7 @@ pd.read_sql('select * from test', db)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -6651,7 +6651,7 @@ pd.read_sql('select * from test', db)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 # 数据清洗和准备
@@ -6795,7 +6795,7 @@ data
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -6847,7 +6847,7 @@ data
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -6857,7 +6857,7 @@ data.dropna()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -6891,7 +6891,7 @@ data.dropna()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 传入 `how='all'` 将只丢弃全为NA的那些行：
@@ -6903,7 +6903,7 @@ data.dropna(how='all')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -6949,7 +6949,7 @@ data.dropna(how='all')
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 丢弃列，只需传入axis=1即可：
@@ -6962,7 +6962,7 @@ data
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -7019,7 +7019,7 @@ data
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -7029,7 +7029,7 @@ data.dropna(axis=1, how='all')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -7081,10 +7081,10 @@ data.dropna(axis=1, how='all')
   </tbody>
 </table>
 </div>
+{% endraw %}
 
 
-
-`thresh` 参数 删除 行、列 空值超过指定数字的 
+`thresh` 参数 删除 行、列 空值超过指定数字的
 
 
 ```python
@@ -7093,7 +7093,7 @@ data
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -7150,7 +7150,7 @@ data
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -7161,7 +7161,7 @@ data.dropna(thresh=2)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -7204,7 +7204,7 @@ data.dropna(thresh=2)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 ### 填充缺失数据
@@ -7221,7 +7221,7 @@ df
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -7291,18 +7291,18 @@ df
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
 ```python
-# 填充成 0 
+# 填充成 0
 df.fillna(0)
 ```
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -7372,7 +7372,7 @@ df.fillna(0)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 若是通过一个字典调用fillna，就可以实现对不同的列填充不同的值：
@@ -7385,7 +7385,7 @@ df.fillna({1: 0.5, 2: 0})
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -7455,7 +7455,7 @@ df.fillna({1: 0.5, 2: 0})
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 fillna默认会返回新对象，但也可以对现有对象进行就地修改：
@@ -7468,7 +7468,7 @@ df
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -7538,7 +7538,7 @@ df
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 对 reindex 有效的那些插值方法也可用于fillna：
@@ -7553,7 +7553,7 @@ df
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -7617,7 +7617,7 @@ df
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -7628,7 +7628,7 @@ df.fillna(method='ffill')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -7692,7 +7692,7 @@ df.fillna(method='ffill')
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -7703,7 +7703,7 @@ df.fillna(method='ffill', limit=2)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -7767,7 +7767,7 @@ df.fillna(method='ffill', limit=2)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 可以传入Series的平均值或中位数：
@@ -7807,7 +7807,7 @@ data.fillna(data.mean())
 
 
 
-fillna函数参数 
+fillna函数参数
 ![](http://upload-images.jianshu.io/upload_images/7178691-0bf235386a64c3b5.png?imageMogr2/auto-orient/strip|imageView2/2/w/1240)
 ![](http://upload-images.jianshu.io/upload_images/7178691-4edd39e68f4dc530.png?imageMogr2/auto-orient/strip|imageView2/2/w/1240)
 
@@ -7823,7 +7823,7 @@ data
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -7885,7 +7885,7 @@ data
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 duplicated 方法返回一个布尔型 Series，表示各行是否是重复行（前面出现过的行）：
@@ -7918,7 +7918,7 @@ data.drop_duplicates()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -7975,7 +7975,7 @@ data.drop_duplicates()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 这两个方法默认会判断全部列，你也可以指定部分列进行重复项判断。
@@ -7987,7 +7987,7 @@ data.drop_duplicates(['k1'])
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -8024,7 +8024,7 @@ data.drop_duplicates(['k1'])
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 duplicated 和 drop_duplicates 默认保留的是第一个出现的值组合。传入 `keep='last'` 则保留最后一个：
@@ -8036,7 +8036,7 @@ data.drop_duplicates(['k1', 'k2'], keep='last')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -8093,7 +8093,7 @@ data.drop_duplicates(['k1', 'k2'], keep='last')
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 利用函数或映射进行数据转换
@@ -8111,7 +8111,7 @@ data
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -8183,7 +8183,7 @@ data
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 假设你想要添加一列表示该肉类食物来源的动物类型。我们先编写一个不同肉类到动物的映射：
@@ -8253,7 +8253,7 @@ data
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -8335,7 +8335,7 @@ data
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 我们也可以使用下面的这种方式
@@ -8472,7 +8472,7 @@ data
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -8522,7 +8522,7 @@ data
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 跟Series一样，轴索引也有一个map方法：
@@ -8550,7 +8550,7 @@ data
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -8600,7 +8600,7 @@ data
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 如果想要创建数据集的转换版（而不是修改原始数据），比较实用的方法是rename：
@@ -8612,7 +8612,7 @@ data.rename(index=str.title, columns=str.upper)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -8662,7 +8662,7 @@ data.rename(index=str.title, columns=str.upper)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 rename可以结合字典型对象实现对部分轴标签的更新：
@@ -8674,7 +8674,7 @@ data.rename(index={'OHIO': 'INDIANA'}, columns={'three': 'peekaboo'})
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -8724,7 +8724,7 @@ data.rename(index={'OHIO': 'INDIANA'}, columns={'three': 'peekaboo'})
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 rename可以实现复制DataFrame并对其索引和列标签进行赋值。如果希望就地修改某个数据集，传入 `inplace=True` 即可：
@@ -8737,7 +8737,7 @@ data
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -8787,7 +8787,7 @@ data
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 ### 离散化和面元划分
@@ -8961,7 +8961,7 @@ data.describe()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -9046,7 +9046,7 @@ data.describe()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 假设你想要找出某列中绝对值大小超过3的值
@@ -9074,7 +9074,7 @@ data[(np.abs(data) > 3).any(1)]
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -9173,7 +9173,7 @@ data[(np.abs(data) > 3).any(1)]
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 ### 排列和随机采样
@@ -9188,7 +9188,7 @@ df
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -9252,7 +9252,7 @@ df
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -9277,7 +9277,7 @@ df.take(sampler)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -9341,7 +9341,7 @@ df.take(sampler)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 选取随机子集（不重复的）
@@ -9353,7 +9353,7 @@ df.sample(n=3)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -9403,7 +9403,7 @@ df.sample(n=3)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 选取随机子集（允许重复）,不能操作 DateFrame
@@ -9462,7 +9462,7 @@ df
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -9519,7 +9519,7 @@ df
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -9529,7 +9529,7 @@ pd.get_dummies(df['key'])
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -9593,7 +9593,7 @@ pd.get_dummies(df['key'])
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 有时候，你可能想给指标DataFrame的列加上一个前缀，以便能够跟其他数据进行合并。get_dummies的prefix参数可以实现该功能：
@@ -9606,7 +9606,7 @@ dummies
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -9670,7 +9670,7 @@ dummies
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -9682,7 +9682,7 @@ df_with_dummy
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -9753,7 +9753,7 @@ df_with_dummy
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 如果DataFrame中的某行同属于多个分类，则事情就会有点复杂。看一下MovieLens 1M数据集
@@ -9766,12 +9766,12 @@ movies.head()
 ```
 
     C:\ProgramData\Anaconda3\lib\site-packages\ipykernel_launcher.py:2: ParserWarning: Falling back to the 'python' engine because the 'c' engine does not support regex separators (separators > 1 char and different from '\s+' are interpreted as regex); you can avoid this warning by specifying engine='python'.
-      
-    
 
 
 
 
+
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -9829,7 +9829,7 @@ movies.head()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 要为每个genre添加指标变量就需要做一些数据规整操作。首先，我们从数据集中抽取出不同的genre值：
@@ -9884,7 +9884,7 @@ dummies.head()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -10032,7 +10032,7 @@ dummies.head()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 现在，迭代每一部电影，并将dummies各行的条目设为1。要这么做，我们使用dummies.columns来计算每个类型的列索引：
@@ -10094,7 +10094,7 @@ movies_windic.head()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -10261,7 +10261,7 @@ movies_windic.head()
 </table>
 <p>5 rows × 21 columns</p>
 </div>
-
+{% endraw %}
 
 
 ## 字符串操作
@@ -10476,7 +10476,7 @@ data.unstack()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -10528,7 +10528,7 @@ data.unstack()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 unstack的逆运算是stack：
@@ -10558,14 +10558,14 @@ data.unstack().stack()
 
 
 ```python
-frame = pd.DataFrame(np.arange(12).reshape((4, 3)), index=[['a', 'a', 'b', 'b'], [1, 2, 1, 2]], 
+frame = pd.DataFrame(np.arange(12).reshape((4, 3)), index=[['a', 'a', 'b', 'b'], [1, 2, 1, 2]],
         columns=[['Ohio', 'Ohio', 'Colorado'], ['Green', 'Red', 'Green']])
 frame
 ```
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -10626,7 +10626,7 @@ frame
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 各层都可以有名字（可以是字符串，也可以是别的Python对象）。如果指定了名称，它们就会显示在控制台输出中：
@@ -10640,7 +10640,7 @@ frame
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -10712,7 +10712,7 @@ frame
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 有了部分列索引，因此可以轻松选取列分组：
@@ -10724,7 +10724,7 @@ frame['Ohio']
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -10780,7 +10780,7 @@ frame['Ohio']
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -10810,7 +10810,7 @@ frame
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -10882,7 +10882,7 @@ frame
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -10893,7 +10893,7 @@ frame.swaplevel('key1', 'key2')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -10967,7 +10967,7 @@ frame.swaplevel('key1', 'key2')
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 sort_index则根据单个级别中的值对数据进行排序。
@@ -10980,7 +10980,7 @@ frame.sort_index(level=1)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -11054,7 +11054,7 @@ frame.sort_index(level=1)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -11064,7 +11064,7 @@ frame.sort_index(level=0)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -11136,7 +11136,7 @@ frame.sort_index(level=0)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -11146,7 +11146,7 @@ frame.swaplevel(0, 1).sort_index(level=0)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -11218,7 +11218,7 @@ frame.swaplevel(0, 1).sort_index(level=0)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 ### 根据级别汇总统计
@@ -11232,7 +11232,7 @@ frame
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -11304,7 +11304,7 @@ frame
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -11315,7 +11315,7 @@ frame.sum(level='key2')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -11370,7 +11370,7 @@ frame.sum(level='key2')
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -11381,7 +11381,7 @@ frame.sum(level='color', axis=1)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -11437,7 +11437,7 @@ frame.sum(level='color', axis=1)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 ### 使用DataFrame的列进行索引
@@ -11447,7 +11447,7 @@ DataFrame的set_index函数会将其一个或多个列转换为行索引，并�
 
 
 ```python
-frame = pd.DataFrame({'a': range(7), 'b': range(7, 0, -1), 
+frame = pd.DataFrame({'a': range(7), 'b': range(7, 0, -1),
                       'c': ['one', 'one', 'one', 'two', 'two', 'two', 'two'],
                       'd': [0, 1, 2, 0, 1, 2, 3]})
 frame
@@ -11455,7 +11455,7 @@ frame
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -11533,7 +11533,7 @@ frame
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -11544,7 +11544,7 @@ frame2
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -11615,7 +11615,7 @@ frame2
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 默认情况下，那些列会从DataFrame中移除，但也可以将其保留下来：
@@ -11627,7 +11627,7 @@ frame.set_index(['c', 'd'], drop=False)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -11716,7 +11716,7 @@ frame.set_index(['c', 'd'], drop=False)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 reset_index的功能跟set_index刚好相反，层次化索引的级别会被转移到列里面：
@@ -11728,7 +11728,7 @@ frame2.reset_index()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -11806,7 +11806,7 @@ frame2.reset_index()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 ## 合并数据集
@@ -11831,7 +11831,7 @@ df1
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -11893,7 +11893,7 @@ df1
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -11903,7 +11903,7 @@ df2
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -11945,7 +11945,7 @@ df2
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 如果没有指定关联的列，merge就会将重叠列的列名当做键。默认情况下，merge做的是“内连接”；结果中的键是交集。
@@ -11957,7 +11957,7 @@ pd.merge(df1, df2)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -12021,7 +12021,7 @@ pd.merge(df1, df2)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 指明要用哪个列进行连接。
@@ -12033,7 +12033,7 @@ pd.merge(df1, df2, on='key')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -12097,7 +12097,7 @@ pd.merge(df1, df2, on='key')
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 如果两个对象的列名不同，也可以分别进行指定：
@@ -12113,7 +12113,7 @@ pd.merge(df3, df4, left_on='lkey', right_on='rkey')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -12184,7 +12184,7 @@ pd.merge(df3, df4, left_on='lkey', right_on='rkey')
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 指定连接方式
@@ -12196,7 +12196,7 @@ pd.merge(df1, df2, how='outer')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -12272,7 +12272,7 @@ pd.merge(df1, df2, how='outer')
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 ![不同的连接类型](http://upload-images.jianshu.io/upload_images/7178691-e49b3341f4a3c90e.png?imageMogr2/auto-orient/strip|imageView2/2/w/1240)
@@ -12281,19 +12281,19 @@ pd.merge(df1, df2, how='outer')
 
 
 ```python
-left = pd.DataFrame({'key1': ['foo', 'foo', 'bar'], 
-                     'key2': ['one', 'two', 'one'], 
+left = pd.DataFrame({'key1': ['foo', 'foo', 'bar'],
+                     'key2': ['one', 'two', 'one'],
                      'lval': [1, 2, 3]})
 
 right = pd.DataFrame({'key1': ['foo', 'foo', 'bar', 'bar'],
                                'key2': ['one', 'one', 'one', 'two'],
                                'rval': [4, 5, 6, 7]})
-left 
+left
 ```
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -12339,7 +12339,7 @@ left
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -12349,7 +12349,7 @@ right
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -12401,7 +12401,7 @@ right
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -12411,7 +12411,7 @@ pd.merge(left, right, on=['key1', 'key2'], how='outer')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -12475,7 +12475,7 @@ pd.merge(left, right, on=['key1', 'key2'], how='outer')
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 对于合并运算需要考虑的最后一个问题是对重复列名的处理。虽然你可以手工处理列名重叠的问题（查看前面介绍的重命名轴标签），但merge有一个更实用的suffixes选项，用于指定附加到左右两个DataFrame对象的重叠列名上的字符串：
@@ -12487,7 +12487,7 @@ pd.merge(left, right, on='key1')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -12565,7 +12565,7 @@ pd.merge(left, right, on='key1')
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -12575,7 +12575,7 @@ pd.merge(left, right, on='key1', suffixes=('_left', '_right'))
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -12653,7 +12653,7 @@ pd.merge(left, right, on='key1', suffixes=('_left', '_right'))
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 merge函数的参数  
@@ -12674,7 +12674,7 @@ left1
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -12731,7 +12731,7 @@ left1
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -12742,7 +12742,7 @@ right1
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -12776,7 +12776,7 @@ right1
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -12786,7 +12786,7 @@ pd.merge(left1, right1, left_on='key', right_index=True)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -12844,7 +12844,7 @@ pd.merge(left1, right1, left_on='key', right_index=True)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 对于层次化索引的数据，事情就有点复杂了，因为索引的合并默认是多键合并：
@@ -12859,7 +12859,7 @@ lefth
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -12917,7 +12917,7 @@ lefth
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -12931,7 +12931,7 @@ righth
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -12991,7 +12991,7 @@ righth
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 这种情况下，你必须以列表的形式指明用作合并键的多个列
@@ -13003,7 +13003,7 @@ pd.merge(lefth, righth, left_on=['key1', 'key2'], right_index=True)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -13073,7 +13073,7 @@ pd.merge(lefth, righth, left_on=['key1', 'key2'], right_index=True)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 同时使用合并双方的索引也没问题：
@@ -13088,7 +13088,7 @@ left2
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -13130,7 +13130,7 @@ left2
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -13143,7 +13143,7 @@ right2
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -13190,7 +13190,7 @@ right2
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -13200,7 +13200,7 @@ pd.merge(left2, right2, how='outer', left_index=True, right_index=True)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -13264,7 +13264,7 @@ pd.merge(left2, right2, how='outer', left_index=True, right_index=True)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 DataFrame还有一个便捷的join实例方法，它能更为方便地实现按索引合并。它还可用于合并多个带有相同或相似索引的DataFrame对象，但要求没有重叠的列。
@@ -13276,7 +13276,7 @@ left2.join(right2, how='outer')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -13340,7 +13340,7 @@ left2.join(right2, how='outer')
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 DataFrame的join方法默认使用的是左连接，保留左边表的行索引。它还支持在调用的DataFrame的列上，连接传递的DataFrame索引：
@@ -13352,7 +13352,7 @@ left1.join(right1, on='key')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -13416,10 +13416,10 @@ left1.join(right1, on='key')
   </tbody>
 </table>
 </div>
+{% endraw %}
 
 
-
-对于简单的索引合并，你还可以向join传入一组DataFrame 
+对于简单的索引合并，你还可以向join传入一组DataFrame
 
 
 ```python
@@ -13431,7 +13431,7 @@ another
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -13478,7 +13478,7 @@ another
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -13488,7 +13488,7 @@ left2.join([right2, another])
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -13546,7 +13546,7 @@ left2.join([right2, another])
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 ### 轴向连接
@@ -13621,17 +13621,17 @@ pd.concat([s1, s2, s3], axis=1)
 
     /usr/local/lib/python3.6/site-packages/ipykernel_launcher.py:1: FutureWarning: Sorting because non-concatenation axis is not aligned. A future version
     of pandas will change to not sort by default.
-    
+
     To accept the future behavior, pass 'sort=False'.
-    
+
     To retain the current behavior and silence the warning, pass 'sort=True'.
-    
+
       """Entry point for launching an IPython kernel.
-    
 
 
 
 
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -13701,7 +13701,7 @@ pd.concat([s1, s2, s3], axis=1)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 这种情况下，另外的轴上没有重叠，从索引的有序并集（外连接）上就可以看出来。传入join='inner'即可得到它们的交集：
@@ -13730,17 +13730,17 @@ pd.concat([s1, s4], axis=1)
 
     /usr/local/lib/python3.6/site-packages/ipykernel_launcher.py:1: FutureWarning: Sorting because non-concatenation axis is not aligned. A future version
     of pandas will change to not sort by default.
-    
+
     To accept the future behavior, pass 'sort=False'.
-    
+
     To retain the current behavior and silence the warning, pass 'sort=True'.
-    
+
       """Entry point for launching an IPython kernel.
-    
 
 
 
 
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -13787,7 +13787,7 @@ pd.concat([s1, s4], axis=1)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -13797,7 +13797,7 @@ pd.concat([s1, s4], axis=1, join='inner')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -13834,7 +13834,7 @@ pd.concat([s1, s4], axis=1, join='inner')
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 通过 join_axes 指定要在其它轴上使用的索引：
@@ -13846,7 +13846,7 @@ pd.concat([s1, s4], axis=1, join_axes=[['a', 'c', 'b', 'e']])
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -13893,7 +13893,7 @@ pd.concat([s1, s4], axis=1, join_axes=[['a', 'c', 'b', 'e']])
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 不过有个问题，参与连接的片段在结果中区分不开。假设你想要在连接轴上创建一个层次化索引。使用keys参数即可达到这个目的：
@@ -13924,7 +13924,7 @@ result.unstack()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -13974,7 +13974,7 @@ result.unstack()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 如果沿着 `axis=1` 对Series进行合并，则keys就会成为DataFrame的列头：
@@ -13986,7 +13986,7 @@ pd.concat([s1, s2, s3], axis=1, keys=['one','two', 'three'], sort=True)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -14056,7 +14056,7 @@ pd.concat([s1, s2, s3], axis=1, keys=['one','two', 'three'], sort=True)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 同样的逻辑也适用于DataFrame对象：
@@ -14069,7 +14069,7 @@ df1
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -14111,7 +14111,7 @@ df1
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -14122,7 +14122,7 @@ df2
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -14159,7 +14159,7 @@ df2
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -14169,7 +14169,7 @@ pd.concat([df1, df2], axis=1, keys=['level1', 'level2'], sort = False)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -14224,7 +14224,7 @@ pd.concat([df1, df2], axis=1, keys=['level1', 'level2'], sort = False)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 如果传入的不是列表而是一个字典，则字典的键就会被当做keys选项的值：
@@ -14236,7 +14236,7 @@ pd.concat({'level1': df1, 'level2': df2}, axis=1, sort = False)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -14291,7 +14291,7 @@ pd.concat({'level1': df1, 'level2': df2}, axis=1, sort = False)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 我们可以用names参数命名创建的轴级别：
@@ -14303,7 +14303,7 @@ pd.concat([df1, df2], axis=1, keys=['level1', 'level2'], names=['upper', 'lower'
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -14358,7 +14358,7 @@ pd.concat([df1, df2], axis=1, keys=['level1', 'level2'], names=['upper', 'lower'
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 DataFrame 在连接的时候会使用原来的索引，可以通过 `ignore_index=True` 来放弃使用  
@@ -14371,7 +14371,7 @@ df1
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -14421,7 +14421,7 @@ df1
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -14432,7 +14432,7 @@ df2
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -14472,7 +14472,7 @@ df2
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -14482,7 +14482,7 @@ pd.concat([df1, df2], sort = False)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -14546,7 +14546,7 @@ pd.concat([df1, df2], sort = False)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -14556,7 +14556,7 @@ pd.concat([df1, df2], ignore_index=True, sort = False)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -14620,7 +14620,7 @@ pd.concat([df1, df2], ignore_index=True, sort = False)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 concat函数的参数  
@@ -14715,7 +14715,7 @@ df1
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -14767,7 +14767,7 @@ df1
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -14779,7 +14779,7 @@ df2
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -14831,7 +14831,7 @@ df2
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -14841,7 +14841,7 @@ df1.combine_first(df2)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -14899,7 +14899,7 @@ df1.combine_first(df2)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 ## 重塑和轴向旋转
@@ -14924,7 +14924,7 @@ data
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -14970,7 +14970,7 @@ data
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 对该数据使用stack方法即可将列转换为行，得到一个Series：
@@ -15004,7 +15004,7 @@ result.unstack()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -15050,7 +15050,7 @@ result.unstack()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 默认情况下，unstack操作的是最内层（stack也是如此）。传入分层级别的编号或名称即可对其它级别进行unstack操作：
@@ -15062,7 +15062,7 @@ result.unstack(0)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -15109,7 +15109,7 @@ result.unstack(0)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -15119,7 +15119,7 @@ result.unstack('state')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -15166,7 +15166,7 @@ result.unstack('state')
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 如果不是所有的级别值都能在各分组中找到的话，则unstack操作可能会引入缺失数据：
@@ -15202,7 +15202,7 @@ data2.unstack()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -15248,7 +15248,7 @@ data2.unstack()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -15304,7 +15304,7 @@ df
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -15370,7 +15370,7 @@ df
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -15381,7 +15381,7 @@ df.unstack('state')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -15447,7 +15447,7 @@ df.unstack('state')
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 当调用stack，我们可以指明轴的名字：
@@ -15459,7 +15459,7 @@ df.unstack('state').stack('side')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -15526,7 +15526,7 @@ df.unstack('state').stack('side')
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 ### 将“长格式”旋转为“宽格式”
@@ -15541,7 +15541,7 @@ data.head()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -15665,7 +15665,7 @@ data.head()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -15710,7 +15710,7 @@ data.head()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -15768,7 +15768,7 @@ data.head()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -15780,7 +15780,7 @@ data.head()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -15844,7 +15844,7 @@ data.head()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 这就是多个时间序列（或者其它带有两个或多个键的可观察数据，这里，我们的键是date和item）的长格式。表中的每行代表一次观察。
@@ -15857,7 +15857,7 @@ ldata.head()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -15915,7 +15915,7 @@ ldata.head()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -15943,7 +15943,7 @@ data.stack().reset_index().head()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -16001,7 +16001,7 @@ data.stack().reset_index().head()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 关系型数据库（如MySQL）中的数据经常都是这样存储的，因为固定架构（即列名和数据类型）有一个好处：随着表中数据的添加，item列中的值的种类能够增加。在前面的例子中，date和item通常就是主键（用关系型数据库的说法），不仅提供了关系完整性，而且提供了更为简单的查询支持。有的情况下，使用这样的数据会很麻烦，你可能会更喜欢DataFrame，不同的item值分别形成一列，date列中的时间戳则用作索引。DataFrame的pivot方法完全可以实现这个转换：
@@ -16014,7 +16014,7 @@ pivoted.head()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -16078,7 +16078,7 @@ pivoted.head()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 前两个传递的值分别用作行和列索引，最后一个可选值则是用于填充DataFrame的数据列。假设有两个需要同时重塑的数据列：
@@ -16092,7 +16092,7 @@ ldata.pivot('date', 'item').head()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -16164,7 +16164,7 @@ ldata.pivot('date', 'item').head()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -16175,7 +16175,7 @@ ldata.head()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -16239,7 +16239,7 @@ ldata.head()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -16249,7 +16249,7 @@ ldata.pivot('date', 'item').head()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -16343,7 +16343,7 @@ ldata.pivot('date', 'item').head()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -16353,7 +16353,7 @@ ldata.pivot('date', 'item', ['value', 'value2']).head()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -16447,7 +16447,7 @@ ldata.pivot('date', 'item', ['value', 'value2']).head()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 pivot其实就是用set_index创建层次化索引，再用unstack重塑：
@@ -16460,7 +16460,7 @@ unstacked.head()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -16554,7 +16554,7 @@ unstacked.head()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 ### 将“宽格式”旋转为“长格式”
@@ -16572,7 +16572,7 @@ df
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -16622,7 +16622,7 @@ df
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 key列可能是分组指标，其它的列是数据值。当使用pandas.melt，我们必须指明哪些列是分组指标。下面使用key作为唯一的分组指标：
@@ -16636,7 +16636,7 @@ melted
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -16718,7 +16718,7 @@ melted
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 使用pivot，可以重塑回原来的样子：
@@ -16731,7 +16731,7 @@ reshaped
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -16783,7 +16783,7 @@ reshaped
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 因为pivot的结果从列创建了一个索引，用作行标签，我们可以使用reset_index将数据移回列：
@@ -16795,7 +16795,7 @@ reshaped.reset_index()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -16845,7 +16845,7 @@ reshaped.reset_index()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 还可以指定列的子集，作为值的列：
@@ -16857,7 +16857,7 @@ pd.melt(df, id_vars=['key'], value_vars=['A', 'B'])
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -16921,7 +16921,7 @@ pd.melt(df, id_vars=['key'], value_vars=['A', 'B'])
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 pandas.melt也可以不用分组指标：
@@ -16933,7 +16933,7 @@ pd.melt(df, value_vars=['A', 'B', 'C'])
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -17005,7 +17005,7 @@ pd.melt(df, value_vars=['A', 'B', 'C'])
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -17015,7 +17015,7 @@ pd.melt(df, value_vars=['key', 'A', 'B'])
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -17087,7 +17087,7 @@ pd.melt(df, value_vars=['key', 'A', 'B'])
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 # 数据聚合与分组运算
@@ -17110,7 +17110,7 @@ df
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -17174,7 +17174,7 @@ df
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 假设你想要按key1进行分组，并计算data1列的平均值。实现该功能的方式有很多，而我们这里要用的是：访问data1，并根据key1调用groupby：
@@ -17240,7 +17240,7 @@ means.unstack()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -17282,7 +17282,7 @@ means.unstack()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 分组键可以是任何长度适当 （等于要分组数据的长度）的数组：
@@ -17316,7 +17316,7 @@ df.groupby('key1').mean()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -17358,7 +17358,7 @@ df.groupby('key1').mean()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -17368,7 +17368,7 @@ df.groupby(['key1', 'key2']).mean()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -17424,7 +17424,7 @@ df.groupby(['key1', 'key2']).mean()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 你可能已经注意到了，第一个例子在执行df.groupby('key1').mean()时，结果中没有key2列。这是因为df['key2']不是数值数据（俗称“麻烦列”），所以被从结果中排除了。默认情况下，所有数值列都会被聚合，虽然有时可能会被过滤为一个子集，稍后就会碰到。
@@ -17461,7 +17461,7 @@ df
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -17525,7 +17525,7 @@ df
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -17544,7 +17544,7 @@ for name, group in df.groupby('key1'):
       key1 key2     data1     data2
     2    b  one  2.506938 -0.954289
     3    b  two -0.503276 -0.698834
-    
+
 
 对于多重键的情况，元组的第一个元素将会是由键值组成的元组：
 
@@ -17568,7 +17568,7 @@ for (k1, k2), group in df.groupby(['key1', 'key2']):
     ('b', 'two')
       key1 key2     data1     data2
     3    b  two -0.503276 -0.698834
-    
+
 
 你可以对这些数据片段做任何操作。有一个你可能会觉得有用的运算：将这些数据片段做成一个字典：
 
@@ -17580,7 +17580,7 @@ pieces['b']
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -17623,7 +17623,7 @@ pieces['b']
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 groupby默认是在 `axis=0` 上进行分组的，通过设置也可以在其他任何轴上进行分组。拿上面例子中的df来说，我们可以根据dtype对列进行分组：
@@ -17667,7 +17667,7 @@ for dtype, group in grouped:
     2    b  one
     3    b  two
     4    a  one
-    
+
 
 ### 选取一列或列的子集
 
@@ -17687,13 +17687,13 @@ df[['data2']].groupby(df['key1'])
 
 
 ```python
-# 双 [[]] 要生成 dataframe 
+# 双 [[]] 要生成 dataframe
 df.groupby(['key1', 'key2'])[['data2']].mean()
 ```
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -17743,7 +17743,7 @@ df.groupby(['key1', 'key2'])[['data2']].mean()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -17777,7 +17777,7 @@ people
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -17847,7 +17847,7 @@ people
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 假设已知列的分组关系，并希望根据分组计算列的和：
@@ -17867,7 +17867,7 @@ by_column.sum()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -17919,7 +17919,7 @@ by_column.sum()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 Series也有同样的功能，它可以被看做一个固定大小的映射：
@@ -17950,7 +17950,7 @@ people.groupby(map_series, axis=1).count()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -18002,7 +18002,7 @@ people.groupby(map_series, axis=1).count()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 ### 通过函数进行分组
@@ -18016,7 +18016,7 @@ people
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -18086,7 +18086,7 @@ people
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 其索引值为人的名字。你可以计算一个字符串长度的数组，更简单的方法是传入 len 函数：
@@ -18098,7 +18098,7 @@ people.groupby(len).sum()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -18152,7 +18152,7 @@ people.groupby(len).sum()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 将函数跟数组、列表、字典、Series混合使用也不是问题，因为任何东西在内部都会被转换为数组：
@@ -18165,7 +18165,7 @@ people.groupby([len, key_list]).min()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -18231,7 +18231,7 @@ people.groupby([len, key_list]).min()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 ### 根据索引级别分组
@@ -18249,7 +18249,7 @@ hier_df
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -18316,7 +18316,7 @@ hier_df
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 要根据级别分组，使用 level 关键字传递级别序号或名字：
@@ -18328,7 +18328,7 @@ hier_df.groupby(level='cty', axis=1).count()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -18375,7 +18375,7 @@ hier_df.groupby(level='cty', axis=1).count()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 ## 数据聚合
@@ -18391,7 +18391,7 @@ df
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -18455,7 +18455,7 @@ df
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -18474,7 +18474,7 @@ grouped.agg(peak_to_peak)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -18516,7 +18516,7 @@ grouped.agg(peak_to_peak)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 获取分组后的描述信息
@@ -18528,7 +18528,7 @@ grouped.describe()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -18635,7 +18635,7 @@ grouped.describe()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 自定义聚合函数要比图中那些经过优化的函数慢得多。这是因为在构造中间分组数据块时存在非常大的开销（函数调用、数据重排等）。
@@ -18653,7 +18653,7 @@ tips.head()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -18735,7 +18735,7 @@ tips.head()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 首先，我根据天和smoker对tips进行分组：
@@ -18785,7 +18785,7 @@ grouped_pct.agg(['mean', 'std', peak_to_peak])
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -18873,7 +18873,7 @@ grouped_pct.agg(['mean', 'std', peak_to_peak])
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 你并非一定要接受GroupBy自动给出的那些列名，特别是lambda函数，它们的名称是''，这样的辨识度就很低了（通过函数的name属性看看就知道了）。因此，如果传入的是一个由(name,function)元组组成的列表，则各元组的第一个元素就会被用作DataFrame的列名（可以将这种二元元组列表看做一个有序映射）：
@@ -18887,7 +18887,7 @@ grouped_pct.agg([('foo', 'mean'), ('bar', np.std)])
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -18965,7 +18965,7 @@ grouped_pct.agg([('foo', 'mean'), ('bar', np.std)])
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 对于DataFrame，你还有更多选择，你可以定义一组应用于全部列的一组函数，或不同的列应用不同的函数。假设我们想要对tip_pct和total_bill列计算三个统计信息：
@@ -18981,7 +18981,7 @@ result
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -19109,7 +19109,7 @@ result
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -19119,7 +19119,7 @@ result['tip_pct']
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -19207,7 +19207,7 @@ result['tip_pct']
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 跟前面一样，这里也可以传入带有自定义名称的一组元组：
@@ -19221,7 +19221,7 @@ grouped['tip_pct', 'total_bill'].agg(ftuples)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -19329,7 +19329,7 @@ grouped['tip_pct', 'total_bill'].agg(ftuples)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 现在，假设你想要对一个列或不同的列应用不同的函数。具体的办法是向agg传入一个从列名映射到函数的字典：
@@ -19342,7 +19342,7 @@ grouped.agg({'tip' : np.max, 'size' : 'sum'})
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -19420,7 +19420,7 @@ grouped.agg({'tip' : np.max, 'size' : 'sum'})
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -19431,7 +19431,7 @@ grouped.agg({'tip_pct' : ['min', 'max', 'mean', 'std'],  'size' : 'sum'})
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -19549,7 +19549,7 @@ grouped.agg({'tip_pct' : ['min', 'max', 'mean', 'std'],  'size' : 'sum'})
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 只有将多个函数应用到至少一列时，DataFrame才会拥有层次化的列。
@@ -19565,7 +19565,7 @@ tips.groupby(['day', 'smoker']).mean()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -19663,7 +19663,7 @@ tips.groupby(['day', 'smoker']).mean()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 可以向 groupby 传入 `as_index=False` 以禁用该功能
@@ -19675,7 +19675,7 @@ tips.groupby(['day', 'smoker'], as_index=False).mean()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -19778,7 +19778,7 @@ tips.groupby(['day', 'smoker'], as_index=False).mean()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 ## apply：一般性的“拆分－应用－合并”
@@ -19793,7 +19793,7 @@ tips.head()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -19875,7 +19875,7 @@ tips.head()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 假设你想要根据分组选出最高的5个tip_pct值。首先，编写一个选取指定列具有最大值的行的函数：
@@ -19889,7 +19889,7 @@ top(tips, n = 6)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -19981,7 +19981,7 @@ top(tips, n = 6)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 如果对smoker分组并用该函数调用apply，就会得到：
@@ -19993,7 +19993,7 @@ tips.groupby('smoker').apply(top)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -20139,7 +20139,7 @@ tips.groupby('smoker').apply(top)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 top函数在DataFrame的各个片段上调用，然后结果由pandas.concat组装到一起，并以分组名称进行了标记。于是，最终结果就有了一个层次化索引，其内层索引值来自原DataFrame。
@@ -20153,7 +20153,7 @@ tips.groupby(['smoker', 'day']).apply(top, n=1, column='total_bill')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -20289,7 +20289,7 @@ tips.groupby(['smoker', 'day']).apply(top, n=1, column='total_bill')
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 在GroupBy中，当你调用诸如describe之类的方法时，实际上只是应用了下面两条代码的快捷方式而已：
@@ -20302,7 +20302,7 @@ result
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -20368,7 +20368,7 @@ result
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -20472,7 +20472,7 @@ tips.groupby('smoker').apply(top)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -20618,7 +20618,7 @@ tips.groupby('smoker').apply(top)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -20628,7 +20628,7 @@ tips.groupby('smoker', group_keys=False).apply(top)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -20760,7 +20760,7 @@ tips.groupby('smoker', group_keys=False).apply(top)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 ### 分位数和桶分析
@@ -20801,7 +20801,7 @@ grouped.apply(get_stats).unstack()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -20865,7 +20865,7 @@ grouped.apply(get_stats).unstack()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 这些都是长度相等的桶。要根据样本分位数得到大小相等的桶，使用qcut即可。传入 `labels=False` 即可只获取分位数的编号：
@@ -20915,7 +20915,7 @@ grouped.apply(get_stats).unstack()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -21021,7 +21021,7 @@ grouped.apply(get_stats).unstack()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 ### 示例：用特定于分组的值填充缺失值
@@ -21074,7 +21074,7 @@ states = ['Ohio', 'New York', 'Vermont', 'Florida',  'Oregon', 'Nevada', 'Califo
 
 group_key = ['East'] * 4 + ['West'] * 4
 
-group_key 
+group_key
 ```
 
 
@@ -21204,7 +21204,7 @@ df
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -21280,7 +21280,7 @@ df
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 利用 category 计算分组加权平均数：
@@ -21321,7 +21321,7 @@ close_px.info()
     SPX     2214 non-null float64
     dtypes: float64(4)
     memory usage: 86.5 KB
-    
+
 
 
 ```python
@@ -21330,7 +21330,7 @@ close_px.head()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -21394,7 +21394,7 @@ close_px.head()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 来做一个比较有趣的任务：计算一个由日收益率（通过百分数变化计算）与SPX之间的年度相关系数组成的DataFrame。下面是一个实现办法，我们先创建一个函数，用它计算每列和SPX列的成对相关系数：
@@ -21409,7 +21409,7 @@ rets.head()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -21473,7 +21473,7 @@ rets.head()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 最后，我们用年对百分比变化进行分组，可以用一个一行的函数，从每行的标签返回每个datetime标签的year属性：
@@ -21489,7 +21489,7 @@ by_year.apply(spx_corr)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -21581,7 +21581,7 @@ by_year.apply(spx_corr)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 还可以计算列与列之间的相关系数。这里，我们计算Apple和Microsoft的年相关系数：
@@ -21631,7 +21631,7 @@ by_year.apply(regress, 'AAPL', ['SPX'])
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -21703,7 +21703,7 @@ by_year.apply(regress, 'AAPL', ['SPX'])
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 ## 透视表和交叉表
@@ -21717,7 +21717,7 @@ tips.head()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -21799,7 +21799,7 @@ tips.head()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 假设我想要根据day和smoker计算分组平均数（pivot_table的默认聚合类型），并将day和smoker放到行上：
@@ -21811,7 +21811,7 @@ tips.pivot_table(index=['day', 'smoker'])
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -21909,7 +21909,7 @@ tips.pivot_table(index=['day', 'smoker'])
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 可以用groupby直接来做。现在，假设我们只想聚合tip_pct和size，而且想根据time进行分组。我将smoker放到列上，把day放到行上：
@@ -21921,7 +21921,7 @@ tips.pivot_table(['tip_pct', 'size'], index=['time', 'day'], columns='smoker')
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -22013,7 +22013,7 @@ tips.pivot_table(['tip_pct', 'size'], index=['time', 'day'], columns='smoker')
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -22023,7 +22023,7 @@ tips.pivot_table(['tip_pct', 'size'], index=['time', 'day'])
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -22089,7 +22089,7 @@ tips.pivot_table(['tip_pct', 'size'], index=['time', 'day'])
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 还可以对这个表作进一步的处理，传入 `margins=True` 添加分项小计。这将会添加标签为All的行和列，其值对应于单个等级中所有数据的分组统计：
@@ -22101,7 +22101,7 @@ tips.pivot_table(['tip_pct', 'size'], index=['time', 'day'], columns='smoker', m
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -22219,7 +22219,7 @@ tips.pivot_table(['tip_pct', 'size'], index=['time', 'day'], columns='smoker', m
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 要使用其他的聚合函数，将其传给aggfunc即可。例如，使用count或len可以得到有关分组大小的交叉表（计数或频率）：
@@ -22231,7 +22231,7 @@ tips.pivot_table('tip_pct', index=['time', 'smoker'], columns='day', aggfunc=len
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -22314,7 +22314,7 @@ tips.pivot_table('tip_pct', index=['time', 'smoker'], columns='day', aggfunc=len
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 如果存在空的组合（也就是NA），你可能会希望设置一个fill_value：
@@ -22327,7 +22327,7 @@ tips.pivot_table('tip_pct', index=['time', 'size', 'smoker'],
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -22528,7 +22528,7 @@ tips.pivot_table('tip_pct', index=['time', 'size', 'smoker'],
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 pivot_table的参数说明请参见表  
@@ -22666,7 +22666,7 @@ fruits = ['apple', 'orange', 'apple', 'apple'] * 2
 N = len(fruits)
 
 df = pd.DataFrame({'fruit': fruits,  
-                   'basket_id': np.arange(N), 
+                   'basket_id': np.arange(N),
                    'count': np.random.randint(3, 15, size=N),
                    'weight': np.random.uniform(0, 4, size=N)},
                    columns=['basket_id', 'fruit', 'count', 'weight'])
@@ -22675,7 +22675,7 @@ df
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -22760,7 +22760,7 @@ df
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 这里，`df['fruit']` 是一个Python字符串对象的数组。我们可以通过调用它，将它转变为分类：
@@ -22855,7 +22855,7 @@ df
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -22940,7 +22940,7 @@ df
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
@@ -23129,7 +23129,7 @@ results
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -23186,7 +23186,7 @@ results
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 分位数列保存了原始的面元分类信息，包括排序：
@@ -23261,7 +23261,7 @@ categories.memory_usage()
 ```
 
     Wall time: 429 ms
-    
+
 
 GroupBy使用分类操作明显更快，是因为底层的算法使用整数编码数组，而不是字符串数组。
 
@@ -23463,7 +23463,7 @@ pd.get_dummies(cat_s)
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -23548,7 +23548,7 @@ pd.get_dummies(cat_s)
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 ### GroupBy高级应用
@@ -23568,7 +23568,7 @@ df
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -23655,7 +23655,7 @@ df
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 按键进行分组：
@@ -23824,7 +23824,7 @@ df
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -23926,7 +23926,7 @@ df
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 这里，我们可以用time作为索引，然后重采样：
@@ -23938,7 +23938,7 @@ df.set_index('time').resample('5min').count()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -23980,7 +23980,7 @@ df.set_index('time').resample('5min').count()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 假设DataFrame包含多个时间序列，用一个额外的分组键的列进行标记：
@@ -23995,7 +23995,7 @@ df2.head()
 
 
 
-
+{% raw %}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -24053,7 +24053,7 @@ df2.head()
   </tbody>
 </table>
 </div>
-
+{% endraw %}
 
 
 
