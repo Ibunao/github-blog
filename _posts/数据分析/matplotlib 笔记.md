@@ -97,7 +97,7 @@ plt.show()
 
 那么问题来了:  
        如果列表a表示10点到12点的每一分钟的气温,如何绘制折线图观察每分钟气温的变化情况?  
-       ```a= [random.randint(20,35) for i in range(120)]```
+       `a= [random.randint(20,35) for i in range(120)]`
 
 
 
